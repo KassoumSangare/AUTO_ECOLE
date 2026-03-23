@@ -761,7 +761,7 @@
         showScreen('quizLoading');
 
         try {
-            const res = await fetch(`/api/quiz/questions?category=${category}`, {
+            const res = await fetch(`/espace-eleve/quiz/questions?category=${category}`, {
                 headers: {
                     'X-CSRF-TOKEN': CSRF,
                     'Accept': 'application/json'

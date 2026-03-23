@@ -64,6 +64,7 @@ Route::middleware(['auth'])->prefix('espace-eleve')->name('eleve.')->group(funct
 
      Route::get('/mediatheque',          [MediathequeController::class, 'index'])->name('mediatheque');
     Route::get('/quiz',                 [QuizController::class, 'index'])->name('quiz');
+    Route::get('/quiz/questions',       [QuizController::class, 'getQuestions'])->name('quiz.questions');
     Route::post('/quiz/score',          [QuizController::class, 'storeScore'])->name('quiz.store');
     Route::get('/documents',            [DocumentController::class, 'index'])->name('documents');
     Route::post('/documents',           [DocumentController::class, 'store'])->name('documents.store');
