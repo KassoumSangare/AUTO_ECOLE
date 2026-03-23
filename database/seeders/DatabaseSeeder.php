@@ -26,5 +26,8 @@ class DatabaseSeeder extends Seeder
         // ── Élèves de test (dev uniquement) ──────────────────────────
         // Commenter en production avant le déploiement
         User::factory(10)->create();
+
+        // ── Questions du Quiz ─────────────────────────────────────────
+        $this->call(QuizSeeder::class);
     }
 }

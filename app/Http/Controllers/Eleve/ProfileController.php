@@ -30,7 +30,7 @@ class ProfileController extends Controller
             'a_paye'       => $user->hasPaid(),
         ];
 
-        return view('eleve.profile', compact('user', 'stats'));
+        return view('eleve.profil', compact('user', 'stats'));
     }
 
     // ──────────────────────────────────────────

@@ -768,9 +768,21 @@
                 }
             });
 
-            if (!res.ok) throw new Error('Erreur réseau');
+            console.log('Response status:', res.status, res.statusText);
+            
+            if (!res.ok) {
+                const errorText = await res.text();
+                console.error('Erreur serveur:', res.status, errorText);
+                throw new Error(`Erreur ${res.status}: ${res.statusText}`);
+            }
 
             const data = await res.json();
+            console.log('Données reçues:', data);
+            
+            if (!data.questions || data.questions.length === 0) {
+                throw new Error('Aucune question disponible pour cette catégorie.');
+            }
+            
             state.questions = data.questions;
             state.timeLimit = data.time_limit;
             state.timeLeft = data.time_limit;
@@ -781,7 +793,8 @@
             renderQuestion();
 
         } catch (err) {
-            alert('Impossible de charger les questions. Vérifiez votre connexion.');
+            console.error('Erreur complète:', err);
+            alert('Impossible de charger les questions.\n\n' + (err.message || 'Vérifiez votre connexion.'));
             showScreen('quizHome');
         }
     }
