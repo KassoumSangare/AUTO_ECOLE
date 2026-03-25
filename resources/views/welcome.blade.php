@@ -3,6 +3,13 @@
 
 @section('head')
 <style>
+    .step-num {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white; /* Pour que l'icône soit blanche sur le fond de couleur */
+}
+
     /* ══ PALETTE (héritage app.css — on ne redéclare que ce dont on a besoin) ══ */
     :root {
         --rouge: #AF2636;
@@ -1228,7 +1235,7 @@
                 <div class="hero-cta">
                     <a href="{{ route('register') }}" class="btn-hero-primary">
                         <i class="bi bi-rocket-takeoff-fill" style="color:var(--vert);"></i>
-                        Commencer maintenant
+                        Commencez maintenant
                     </a>
                     <a href="#comment-ca-marche" class="btn-hero-outline">
                         <i class="bi bi-play-circle"></i>Voir comment ça marche
@@ -1264,8 +1271,8 @@
                         <div class="lbl">Taux de réussite</div>
                     </div>
                     <div class="stat-bubble" style="bottom:28%;right:-12px;animation:fade-up .6s .55s both;border-left-color:var(--vert);">
-                        <div class="num" style="color:var(--vert);">500+</div>
-                        <div class="lbl">Élèves formés</div>
+                        <div class="num" style="color:var(--vert);">1000+</div>
+                        <div class="lbl">candidats qui ont déjà obtenus leurs permis chez nous. </div>
                     </div>
                 </div>
             </div>
@@ -1314,7 +1321,7 @@
     <div class="container">
         <div class="row g-0 text-center">
             <div class="col-6 col-md-3 stat-item reveal">
-                <span class="number counter-num" data-target="500">0</span><span class="number">+</span>
+                <span class="number counter-num" data-target="1000">0</span><span class="number">+</span>
                 <span class="label">Élèves formés</span>
             </div>
             <div class="col-6 col-md-3 stat-item reveal" style="transition-delay:.1s">
@@ -1322,7 +1329,7 @@
                 <span class="label">Taux de réussite</span>
             </div>
             <div class="col-6 col-md-3 stat-item reveal" style="transition-delay:.2s">
-                <span class="number counter-num" data-target="5">0</span><span class="number"> ans</span>
+                <span class="number counter-num" data-target="7">0</span><span class="number"> ans</span>
                 <span class="label">D'expérience</span>
             </div>
             <div class="col-6 col-md-3 stat-item reveal" style="transition-delay:.3s">
@@ -1456,7 +1463,7 @@
                     </ul>
 
                     <a href="{{ route('register') }}" class="btn-cta-main w-100 justify-content-center">
-                        <i class="bi bi-rocket-takeoff-fill"></i>Commencer maintenant
+                        <i class="bi bi-rocket-takeoff-fill"></i>commencez maintenant
                     </a>
 
                     <div class="pricing-guarantee">
@@ -1617,7 +1624,7 @@
         <div class="text-center mb-5 reveal">
             <span class="section-tag"><i class="bi bi-chat-quote-fill me-1"></i>Témoignages</span>
             <h2 class="section-title">Ce que disent nos élèves</h2>
-            <p class="section-sub">Plus de 500 élèves nous ont fait confiance à Abidjan.</p>
+            <p class="section-sub">Plus de 1000 élèves nous ont fait confiance à Abidjan.</p>
         </div>
         <div class="row g-4">
             @php
@@ -1709,10 +1716,16 @@
                                     <div class="contact-row-icon" style="background:var(--vert);"><i class="bi bi-telephone-fill"></i></div>
                                     <span class="contact-row-text">+225 27 24 31 88 38</span>
                                 </a>
-                                <a href="https://wa.me/2252724318838" target="_blank" class="contact-row">
-                                    <div class="contact-row-icon" style="background:#25D366;"><i class="bi bi-whatsapp"></i></div>
-                                    <span class="contact-row-text">WhatsApp disponible 7j/7</span>
+                                <a href="https://wa.me/2250545160597" target="_blank" class="contact-row">
+                                    <div class="contact-row-icon" style="background:#25D366;">
+                                        <i class="bi bi-whatsapp"></i>
+                                    </div>
+                                    <span class="contact-row-text">
+                                        <strong>05 45 16 05 97</strong><br>
+                                        WhatsApp & Appel 7j/7
+                                    </span>
                                 </a>
+
                                 <div class="contact-row">
                                     <div class="contact-row-icon" style="background:#F97316;"><i class="bi bi-geo-alt-fill"></i></div>
                                     <span class="contact-row-text">Non loin de la Grande Pharmacie du Dokui, Avenue ADAMA TOUNGARA — Plateau Dokui, Abobo, Abidjan</span>
@@ -1785,7 +1798,7 @@
                 Prêt à décrocher votre permis ?
             </h2>
             <p style="color:rgba(255,255,255,.82);max-width:500px;margin:.75rem auto 2rem;font-size:1rem;line-height:1.7;">
-                Plus de <strong style="color:#fff;">500 élèves</strong> nous font déjà confiance à Abidjan.
+                Plus de <strong style="color:#fff;">1000 élèves</strong> nous font déjà confiance à Abidjan.
                 Rejoignez-les et commencez votre formation dès aujourd'hui.
             </p>
             <div class="d-flex flex-wrap gap-3 justify-content-center">

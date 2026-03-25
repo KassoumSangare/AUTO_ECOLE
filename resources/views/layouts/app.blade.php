@@ -737,6 +737,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <!-- À mettre dans le <head> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net">
 
     <style>
         /* ══ PALETTE Le Chemin — Adoucie & Fluide ══════════ */
@@ -1131,7 +1133,7 @@
     </div>
 
     {{-- ══ WHATSAPP ══ --}}
-    <a href="https://wa.me/2252724318838?text=Bonjour%2C%20j'ai%20besoin%20d'aide."
+    <a href="https://wa.me/2250545160597?text=Bonjour%2C%20j'ai%20besoin%20d'aide."
         target="_blank" rel="noopener noreferrer"
         class="whatsapp-float" aria-label="Support WhatsApp">
         <i class="bi bi-whatsapp"></i>

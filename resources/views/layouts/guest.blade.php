@@ -12,6 +12,9 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- À mettre dans le <head> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net">
+
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
     {{-- Font override AVANT Bootstrap --}}
@@ -631,7 +634,7 @@
     </footer>
 
     {{-- ══ WHATSAPP ══ --}}
-    <a href="https://wa.me/2252724318838?text=Bonjour%2C%20je%20souhaite%20m'inscrire%20%C3%A0%20l'auto-%C3%A9cole%20Le%20Chemin."
+    <a href="https://wa.me/2250545160597?text=Bonjour%2C%20je%20souhaite%20m'inscrire%20%C3%A0%20l'auto-%C3%A9cole%20Le%20Chemin."
         target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Nous contacter sur WhatsApp">
         <i class="bi bi-whatsapp"></i>
     </a>
