@@ -1558,7 +1558,7 @@
                             </div>
                             <div class="pricing-currency">XOF</div>
                         </div>
-                        <div class="pricing-sub">Paiement unique — Accès permanent</div>
+                        <!-- <div class="pricing-sub">Paiement unique — Accès permanent</div> -->
                     </div>
 
                     <ul class="pricing-list">
@@ -1571,22 +1571,22 @@
                         <li>
                             <div class="pi"><i class="bi bi-check2"></i></div>Suivi de progression personnalisé
                         </li>
-                        <li>
+                        <!-- <li>
                             <div class="pi"><i class="bi bi-check2"></i></div>Coffre-fort numérique de documents
-                        </li>
-                        <li>
+                        </li> -->
+                        <!-- <li>
                             <div class="pi"><i class="bi bi-check2"></i></div>Reçu PDF officiel automatique
-                        </li>
+                        </li> -->
                         <li>
                             <div class="pi"><i class="bi bi-check2"></i></div>Accès depuis mobile, tablette, PC
                         </li>
-                        <li>
+                        <!-- <li>
                             <div class="pi"><i class="bi bi-check2"></i></div>Support WhatsApp prioritaire
-                        </li>
+                        </li> -->
                     </ul>
 
                     <a href="{{ route('register') }}" class="btn-cta-main w-100 justify-content-center">
-                        <i class="bi bi-rocket-takeoff-fill"></i>Commencer maintenant
+                        <i class="bi bi-rocket-takeoff-fill"></i>Commencez maintenant
                     </a>
 
                     <div class="pricing-guarantee">

@@ -16,7 +16,7 @@ class HomeController extends Controller
     public function index(): View
     {
         // Récupérer les catégories actives triées par ordre d'affichage
-        // $categories = PermitCategory::active()->ordered()->get();
+        $categories = PermitCategory::active()->ordered()->get();
 
         // Remplacement de la valeur statique (12547) par la logique réelle.
         // Option A : Si chaque visite = une nouvelle ligne dans la table
