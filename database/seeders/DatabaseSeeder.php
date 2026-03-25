@@ -29,5 +29,9 @@ class DatabaseSeeder extends Seeder
 
         // ── Questions du Quiz ─────────────────────────────────────────
         $this->call(QuizSeeder::class);
+        $this->call([
+            PermitCategorySeeder::class,
+          
+        ]);
     }
 }

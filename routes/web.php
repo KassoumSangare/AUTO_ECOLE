@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Admin\PermitCategoryController;
 use App\Http\Controllers\Eleve\DashboardController;
 use App\Http\Controllers\Eleve\MediathequeController;
 use App\Http\Controllers\Eleve\QuizController;
@@ -18,6 +19,8 @@ use Illuminate\Support\Facades\Route;
 // ══════════════════════════════════════════════════════
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+// API pour récupérer les détails d'une catégorie (utilisé par le JS)
+Route::get('/api/categories/{code}', [HomeController::class, 'getCategory'])->name('api.category.show');
 
 // ──────────────────────────────────────────
 //  AUTHENTIFICATION (invités seulement)
@@ -62,7 +65,7 @@ Route::middleware(['auth'])->prefix('espace-eleve')->name('eleve.')->group(funct
     //     Route::delete('/documents/{document}', [DocumentController::class, 'destroy'])->name('documents.destroy');
     // });
 
-     Route::get('/mediatheque',          [MediathequeController::class, 'index'])->name('mediatheque');
+    Route::get('/mediatheque',          [MediathequeController::class, 'index'])->name('mediatheque');
     Route::get('/quiz/questions',       [QuizController::class, 'getQuestions'])->name('quiz.questions');
     Route::get('/quiz',                 [QuizController::class, 'index'])->name('quiz');
     Route::post('/quiz/score',          [QuizController::class, 'storeScore'])->name('quiz.store');
@@ -97,6 +100,13 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     // Reporting financier
     Route::get('/reporting',                [ReportingController::class, 'index'])->name('reporting.index');
     Route::get('/reporting/export',         [ReportingController::class, 'exportExcel'])->name('reporting.export');
+
+    // CRUD complet pour les catégories de permis
+    Route::resource('permit-categories', PermitCategoryController::class);
+
+    // Route pour activer/désactiver une catégorie (AJAX)
+    Route::post('permit-categories/{permitCategory}/toggle-active', [PermitCategoryController::class, 'toggleActive'])
+        ->name('permit-categories.toggle-active');
 });
 
 // ══════════════════════════════════════════════════════
@@ -109,11 +119,11 @@ Route::middleware(['auth'])->prefix('api')->name('api.')->group(function () {
 });
 
 // Route téléchargement document admin (hors groupe pour le binding)
-Route::middleware(['auth','admin'])
+Route::middleware(['auth', 'admin'])
     ->get('/admin/documents/{document}/download', [AdminDocumentController::class, 'download'])
     ->name('admin.documents.download');
 
-Route::middleware(['auth','admin'])
+Route::middleware(['auth', 'admin'])
     ->get('/admin/documents/impression', [AdminDocumentController::class, 'printAll'])
     ->name('admin.documents.print');
 
@@ -121,6 +131,6 @@ Route::middleware(['auth','admin'])
 Route::middleware(['auth'])->group(function () {
     Route::get('/espace-eleve/profil',           [\App\Http\Controllers\Eleve\ProfileController::class, 'index'])->name('eleve.profile');
     Route::patch('/espace-eleve/profil',         [\App\Http\Controllers\Eleve\ProfileController::class, 'update'])->name('eleve.profile.update');
-    Route::patch('/espace-eleve/profil/password',[\App\Http\Controllers\Eleve\ProfileController::class, 'updatePassword'])->name('eleve.profile.password');
+    Route::patch('/espace-eleve/profil/password', [\App\Http\Controllers\Eleve\ProfileController::class, 'updatePassword'])->name('eleve.profile.password');
     // Route documents.download → définie dans le groupe eleve. (eleve.documents.download)
 });

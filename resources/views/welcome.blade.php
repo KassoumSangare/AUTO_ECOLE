@@ -534,7 +534,7 @@
         line-height: 1.65;
     }
 
-    /* ══ TARIFS ══════════════════════════════════════════════════════ */
+    /* ══ TARIFS — NOUVEAU SYSTÈME ═══════════════════════════════════ */
     .pricing-section {
         padding: 5.5rem 0;
         background: #fff;
@@ -548,7 +548,7 @@
         position: relative;
         overflow: hidden;
         box-shadow: 0 20px 60px rgba(175, 38, 54, .15);
-        max-width: 480px;
+        max-width: 580px;
         margin: 0 auto;
     }
 
@@ -577,13 +577,78 @@
         box-shadow: 0 3px 10px rgba(197, 160, 89, .4);
     }
 
+    /* Sélecteur de catégories */
+    .category-selector {
+        display: flex;
+        flex-wrap: wrap;
+        gap: .65rem;
+        margin-bottom: 2rem;
+        justify-content: center;
+    }
+
+    .category-btn {
+        flex: 1;
+        min-width: 90px;
+        padding: .7rem 1rem;
+        border-radius: 12px;
+        border: 2px solid var(--border);
+        background: #fff;
+        color: var(--texte-2);
+        font-weight: 700;
+        font-size: .82rem;
+        text-align: center;
+        cursor: pointer;
+        transition: all .25s ease;
+        font-family: var(--font-d) !important;
+    }
+
+    .category-btn:hover {
+        border-color: var(--rouge);
+        color: var(--rouge);
+        transform: translateY(-2px);
+    }
+
+    .category-btn.active {
+        background: linear-gradient(135deg, var(--rouge), var(--rouge-c));
+        border-color: var(--rouge);
+        color: #fff;
+        box-shadow: 0 4px 14px rgba(175, 38, 54, .3);
+    }
+
     .pricing-name {
         font-family: var(--font-d) !important;
-        font-size: 1.1rem;
+        font-size: 1.2rem;
         font-weight: 800;
+        color: var(--texte);
+        margin-bottom: .75rem;
+        min-height: 1.5rem;
+    }
+
+    .pricing-description {
+        font-size: .86rem;
         color: var(--texte-2);
-        text-transform: uppercase;
-        letter-spacing: .1em;
+        margin-bottom: 1.5rem;
+        line-height: 1.65;
+        min-height: 2.5rem;
+    }
+
+    /* Prix avec réduction */
+    .pricing-price-container {
+        margin-bottom: 1.75rem;
+    }
+
+    .pricing-original-price {
+        font-size: 1.1rem;
+        color: var(--texte-2);
+        text-decoration: line-through;
+        font-weight: 600;
+        margin-bottom: .35rem;
+    }
+
+    .pricing-price-row {
+        display: flex;
+        align-items: end;
+        gap: .5rem;
         margin-bottom: .5rem;
     }
 
@@ -591,7 +656,7 @@
         font-family: var(--font-d) !important;
         font-size: 3.2rem;
         font-weight: 900;
-        color: var(--rouge);
+        color: var(--vert);
         line-height: 1;
     }
 
@@ -605,13 +670,24 @@
         font-size: 1rem;
         color: var(--texte-2);
         font-weight: 600;
-        margin-left: .35rem;
+        margin-bottom: .5rem;
+    }
+
+    .pricing-discount-badge {
+        display: inline-block;
+        background: var(--vert-p);
+        color: var(--vert);
+        font-size: .75rem;
+        font-weight: 700;
+        padding: .35rem .85rem;
+        border-radius: 50px;
+        font-family: var(--font-d) !important;
+        margin-bottom: .5rem;
     }
 
     .pricing-sub {
         font-size: .82rem;
         color: var(--texte-2);
-        margin-top: .4rem;
         margin-bottom: 1.75rem;
     }
 
@@ -647,6 +723,22 @@
         font-size: .75rem;
         flex-shrink: 0;
         margin-top: .1rem;
+    }
+
+    .pricing-note {
+        background: var(--or-p);
+        border-left: 3px solid var(--or);
+        padding: .75rem 1rem;
+        border-radius: 8px;
+        font-size: .78rem;
+        color: var(--texte-2);
+        line-height: 1.65;
+        margin-top: 1.25rem;
+    }
+
+    .pricing-note strong {
+        color: var(--texte);
+        font-weight: 700;
     }
 
     .pricing-guarantee {
@@ -1355,7 +1447,7 @@
             @php
             $steps = [
             ['num'=>'01','icon'=>'bi-person-plus-fill','title'=>'Inscription gratuite','desc'=>'Créez votre compte en 2 minutes avec votre nom, prénom et numéro de téléphone. Aucun document requis pour débuter.','badge'=>'Gratuit & instantané','color'=>'var(--rouge)'],
-            ['num'=>'02','icon'=>'bi-credit-card-fill','title'=>'Paiement Wave CI','desc'=>'Réglez vos frais de formation en toute sécurité via Wave CI. Reçu PDF généré automatiquement et envoyé sur votre compte.','badge'=>'50 000 XOF unique','color'=>'var(--or)'],
+            ['num'=>'02','icon'=>'bi-credit-card-fill','title'=>'Choix & Paiement Wave CI','desc'=>'Choisissez votre catégorie de permis et réglez vos frais de formation en toute sécurité via Wave CI. Reçu PDF généré automatiquement.','badge'=>'Paiement sécurisé','color'=>'var(--or)'],
             ['num'=>'03','icon'=>'bi-play-circle-fill','title'=>'Formation & Examen','desc'=>'Accédez aux vidéos, quiz interactifs et à votre coffre numérique. Suivez votre progression jusqu\'au jour de l\'examen.','badge'=>'Accès illimité 24h/7','color'=>'var(--vert)'],
             ];
             @endphp
@@ -1416,27 +1508,58 @@
 </section>
 
 {{-- ═══════════════════════════════════════════════════
-     6. TARIFS
+     6. TARIFS — NOUVEAU SYSTÈME PAR CATÉGORIE
 ═══════════════════════════════════════════════════ --}}
 <section class="pricing-section" id="tarifs" aria-label="Tarifs">
     <div class="container">
         <div class="text-center mb-5 reveal">
             <span class="section-tag"><i class="bi bi-tag-fill me-1"></i>Tarification transparente</span>
-            <h2 class="section-title">Un seul forfait, tout inclus</h2>
-            <p class="section-sub">Pas de frais cachés. Un paiement unique, un accès complet.</p>
+            <h2 class="section-title">Choisissez votre catégorie</h2>
+            <p class="section-sub">Sélectionnez le permis qui vous convient et profitez d'une réduction en ligne.</p>
         </div>
 
         <div class="row justify-content-center">
-            <div class="col-lg-5 col-md-7 reveal">
+            <div class="col-lg-6 col-md-8 reveal">
                 <div class="pricing-card">
-                    <div class="pricing-badge">⭐ Meilleure offre</div>
+                    <div class="pricing-badge">⭐ Réduction en ligne</div>
 
-                    <div class="pricing-name">Forfait Formation Complète</div>
-                    <div class="d-flex align-items-end gap-1 mb-1">
-                        <div class="pricing-price"><sup>CFA</sup>50 000</div>
-                        <div class="pricing-currency">XOF</div>
+                    {{-- Sélecteur de catégories --}}
+                    <div class="category-selector">
+                        @foreach($categories as $index => $category)
+                        <button 
+                            class="category-btn {{ $index === 0 ? 'active' : '' }}" 
+                            data-category="{{ $category->code }}"
+                            data-name="{{ $category->name }}"
+                            data-description="{{ $category->description }}"
+                            data-price="{{ $category->price }}"
+                            data-discounted="{{ $category->discounted_price }}"
+                            data-discount-percent="{{ $category->online_discount_percent }}"
+                            onclick="selectCategory(this)">
+                            {{ $category->code }}
+                        </button>
+                        @endforeach
                     </div>
-                    <div class="pricing-sub">Paiement unique — Accès permanent</div>
+
+                    {{-- Affichage dynamique --}}
+                    <div class="pricing-name" id="categoryName">{{ $categories->first()->name }}</div>
+                    <div class="pricing-description" id="categoryDescription">{{ $categories->first()->description }}</div>
+
+                    <div class="pricing-price-container">
+                        <div class="pricing-original-price" id="originalPrice">
+                            Prix normal : <span id="originalPriceValue">{{ number_format($categories->first()->price, 0, ',', ' ') }}</span> XOF
+                        </div>
+                        <div class="pricing-discount-badge">
+                            <i class="bi bi-percent"></i> 
+                            <span id="discountPercent">{{ $categories->first()->online_discount_percent }}</span>% de réduction en ligne
+                        </div>
+                        <div class="pricing-price-row">
+                            <div class="pricing-price">
+                                <sup>CFA</sup><span id="discountedPrice">{{ number_format($categories->first()->discounted_price, 0, ',', ' ') }}</span>
+                            </div>
+                            <div class="pricing-currency">XOF</div>
+                        </div>
+                        <div class="pricing-sub">Paiement unique — Accès permanent</div>
+                    </div>
 
                     <ul class="pricing-list">
                         <li>
@@ -1463,12 +1586,17 @@
                     </ul>
 
                     <a href="{{ route('register') }}" class="btn-cta-main w-100 justify-content-center">
-                        <i class="bi bi-rocket-takeoff-fill"></i>commencez maintenant
+                        <i class="bi bi-rocket-takeoff-fill"></i>Commencer maintenant
                     </a>
 
                     <div class="pricing-guarantee">
                         <i class="bi bi-shield-check-fill" style="color:var(--vert);"></i>
                         Paiement 100% sécurisé via Wave CI
+                    </div>
+
+                    {{-- Note importante --}}
+                    <div class="pricing-note">
+                        <strong>NB :</strong> Les frais de retrait du permis ne sont pas inclus dans le montant de la formation initiale.
                     </div>
                 </div>
             </div>
@@ -1872,6 +2000,33 @@
         rootMargin: '0px 0px -40px 0px'
     });
     document.querySelectorAll('.reveal').forEach(el => rO.observe(el));
+
+    /* ── Sélecteur de catégorie ─────────────────────── */
+    function selectCategory(btn) {
+        // Retirer la classe active de tous les boutons
+        document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+        
+        // Ajouter la classe active au bouton cliqué
+        btn.classList.add('active');
+        
+        // Récupérer les données
+        const name = btn.dataset.name;
+        const description = btn.dataset.description;
+        const price = parseFloat(btn.dataset.price);
+        const discounted = parseFloat(btn.dataset.discounted);
+        const discountPercent = parseFloat(btn.dataset.discountPercent);
+        
+        // Mettre à jour l'affichage
+        document.getElementById('categoryName').textContent = name;
+        document.getElementById('categoryDescription').textContent = description;
+        document.getElementById('originalPriceValue').textContent = formatPrice(price);
+        document.getElementById('discountedPrice').textContent = formatPrice(discounted);
+        document.getElementById('discountPercent').textContent = discountPercent;
+    }
+    
+    function formatPrice(price) {
+        return Math.round(price).toLocaleString('fr-FR');
+    }
 
     /* ── Aperçu plateforme — tabs ───────────────────── */
     function showPreview(id, btn) {
