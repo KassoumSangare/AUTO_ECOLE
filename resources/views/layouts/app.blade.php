@@ -771,6 +771,25 @@
             min-height: 100vh;
             font-family: var(--font-b) !important;
         }
+              .nav-brand-logo {
+    width: 60px;
+    height: 55px;
+    border-radius: 10px;
+    background: #fff;
+    
+    /* Empêche la déformation de l'image */
+    object-fit: cover; 
+    
+    /* Optionnel : si l'image a un fond transparent ou doit être centrée */
+    object-position: center;
+    
+    /* Garde tes propriétés de structure */
+    flex-shrink: 0;
+    
+    /* Pour l'esthétique */
+    border: 1px solid rgba(0,0,0,0.05); 
+}
+
 
         /* ══ SIDEBAR ═══════════════════════════════════════ */
         .sidebar {
@@ -1057,7 +1076,7 @@
     {{-- ══ SIDEBAR ══ --}}
     <aside class="sidebar" id="sidebar" aria-label="Navigation latérale">
         <a href="{{ route('home') }}" class="sidebar-brand">
-            <div class="brand-icon">LC</div>
+     <img src="{{ asset('assets/images/logo.jpeg') }}" class="nav-brand-logo" alt="Logo">
             <div class="brand-name">Le <span>Chemin</span></div>
         </a>
 
@@ -1136,7 +1155,7 @@
     </div>
 
     {{-- ══ WHATSAPP ══ --}}
-    <a href="https://wa.me/2250545160597?text=Bonjour%2C%20j'ai%20besoin%20d'aide."
+    <a href="https://wa.me/2250545160597?text=Bonjour%2C%20je%20souhaite%20des%20informations%20sur%20la%20formation."
         target="_blank" rel="noopener noreferrer"
         class="whatsapp-float" aria-label="Support WhatsApp">
         <i class="bi bi-whatsapp"></i>

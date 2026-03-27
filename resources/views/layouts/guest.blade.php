@@ -110,19 +110,23 @@
             text-decoration: none;
         }
 
-        .nav-brand-icon {
-            width: 38px;
-            height: 38px;
+        .nav-brand-logo {
+            width: 60px;
+            height: 55px;
             border-radius: 10px;
             background: #fff;
-            color: var(--rouge);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: var(--font-d) !important;
-            font-weight: 900;
-            font-size: 1rem;
+
+            /* Empêche la déformation de l'image */
+            object-fit: cover;
+
+            /* Optionnel : si l'image a un fond transparent ou doit être centrée */
+            object-position: center;
+
+            /* Garde tes propriétés de structure */
             flex-shrink: 0;
+
+            /* Pour l'esthétique */
+            border: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         .nav-brand-text {
@@ -558,7 +562,7 @@
     <nav class="navbar-lc" id="navbar" role="navigation" aria-label="Navigation principale">
         <div class="container navbar-inner">
             <a href="{{ route('home') }}" class="nav-brand">
-                <div class="nav-brand-icon">LC</div>
+                <img src="{{ asset('assets/images/logo.jpeg') }}" class="nav-brand-logo" alt="Logo">
                 <span class="nav-brand-text">Le&nbsp;<span>Chemin</span></span>
             </a>
 
@@ -623,10 +627,10 @@
                     </div>
                 </div>
                 <div class="col-md-6 text-md-end d-flex flex-wrap gap-3 justify-content-md-end align-items-center">
-                    <a href="tel:+2252724318838" style="color:rgba(255,255,255,.6);text-decoration:none;font-size:.82rem;display:flex;align-items:center;gap:.35rem;">
+                    <a href="tel:+2250545160597" style="color:rgba(255,255,255,.6);text-decoration:none;font-size:.82rem;display:flex;align-items:center;gap:.35rem;">
                         <i class="bi bi-telephone-fill" style="color:var(--vert-p);"></i>+225 27 24 31 88 38
                     </a>
-                    <a href="https://wa.me/2252724318838" target="_blank" style="color:rgba(255,255,255,.6);text-decoration:none;font-size:.82rem;display:flex;align-items:center;gap:.35rem;">
+                    <a href="https://wa.me/2250545160597?text=Bonjour%2C%20je%20souhaite%20des%20informations%20sur%20la%20formation." target="_blank" style="color:rgba(255,255,255,.6);text-decoration:none;font-size:.82rem;display:flex;align-items:center;gap:.35rem;">
                         <i class="bi bi-whatsapp" style="color:#25D366;"></i>WhatsApp
                     </a>
                 </div>
