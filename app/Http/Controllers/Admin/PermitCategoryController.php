@@ -59,29 +59,32 @@ class PermitCategoryController extends Controller
     /**
      * Met à jour une catégorie.
      */
-    public function update(Request $request, PermitCategory $permitCategory)
-    {
-        $validated = $request->validate([
-            'code' => [
-                'required',
-                'string',
-                'max:20',
-                Rule::unique('permit_categories', 'code')->ignore($permitCategory->id),
-            ],
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'price' => 'required|numeric|min:0',
-            'online_discount_percent' => 'required|numeric|min:0|max:100',
-            'is_active' => 'boolean',
-            'display_order' => 'required|integer|min:0',
-        ]);
 
-        $permitCategory->update($validated);
+public function update(Request $request, PermitCategory $permitCategory)
+{
+    $validated = $request->validate([
+        'code' => [
+            'required',
+            'string',
+            'max:20',
+            Rule::unique('permit_categories', 'code')->ignore($permitCategory->id),
+        ],
+        'name' => 'required|string|max:255',
+        'description' => 'nullable|string',
+        'price' => 'required|numeric|min:0',
+        'online_discount_percent' => 'required|numeric|min:0|max:100',
+        'display_order' => 'required|integer|min:0',
+    ]);
 
-        return redirect()
-            ->route('admin.permit-categories.index')
-            ->with('success', 'Catégorie mise à jour avec succès.');
-    }
+    // ✅ Gestion correcte du checkbox
+    $validated['is_active'] = $request->has('is_active');
+
+    $permitCategory->update($validated);
+
+    return redirect()
+        ->route('admin.permit-categories.index')
+        ->with('success', 'Catégorie mise à jour avec succès.');
+}
 
     /**
      * Supprime une catégorie.

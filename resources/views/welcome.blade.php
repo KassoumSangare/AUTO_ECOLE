@@ -1,4 +1,4 @@
-@extends('layouts.guest')
+g@extends('layouts.guest')
 @section('title', 'Accueil — Auto-École Le Chemin')
 
 @section('head')

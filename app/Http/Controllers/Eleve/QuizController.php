@@ -35,25 +35,28 @@ class QuizController extends Controller
         return view('eleve.quiz', compact('scores', 'statsCode', 'statsConduite'));
     }
 
-    public function getQuestions(Request $request): JsonResponse
-    {
-        $request->validate(['category' => ['required', 'in:code,conduite']]);
+  public function getQuestions(Request $request): JsonResponse
+{
+    $request->validate(['category' => ['required', 'in:code,conduite']]);
 
-        $questions = QuizQuestion::where('category', $request->category)
-            ->where('is_active', true)
-            ->inRandomOrder()
-            ->limit(self::QUESTIONS_PAR_QUIZ)
-            ->get()
-            ->map(fn($q) => $q->toApiArray());
+    $questions = QuizQuestion::where('category', $request->category)
+        ->where('is_active', true)
+        ->inRandomOrder()
+        ->limit(self::QUESTIONS_PAR_QUIZ)
+        ->get()
+        ->map(function ($q) {
+            $arr = $q->toApiArray();
+            $arr['correct_index'] = $q->correct_index; // ← ajout
+            return $arr;
+        });
 
-        return response()->json([
-            'questions'  => $questions,
-            'total'      => $questions->count(),
-            'category'   => $request->category,
-            'time_limit' => 30 * 60,
-        ]);
-    }
-
+    return response()->json([
+        'questions'  => $questions,
+        'total'      => $questions->count(),
+        'category'   => $request->category,
+        'time_limit' => 30 * 60,
+    ]);
+}
     public function storeScore(Request $request): JsonResponse
     {
         $request->validate([

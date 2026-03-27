@@ -9,7 +9,9 @@
     <title>@yield('title', 'Espace Élève') — Auto-École Le Chemin</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Open+Sans:wght@400;500;600&display=swap"
+        rel="stylesheet" />
 
     {{-- Font override AVANT Bootstrap --}}
     <style>
@@ -68,8 +70,8 @@
             --shadow-lg: 0 16px 48px rgba(175, 38, 54, .14);
             --shadow-or: 0 8px 28px rgba(197, 160, 89, .35);
             --trans: .3s cubic-bezier(.4, 0, .2, 1);
-            --font-d: 'Syne', Georgia, serif;
-            --font-b: 'DM Sans', 'Helvetica Neue', Arial, sans-serif;
+            --font-d: "Poppins", sans-serif;
+            --font-b: "Poppins", sans-serif;
         }
 
         /* 2. RESET & BASE */
@@ -1063,6 +1065,7 @@
             @if(auth()->user()->isAdmin())
             <div class="sidebar-label">Administration</div>
             <a href="{{ route('admin.dashboard') }}" class="sidebar-link @active('admin/tableau*')"><i class="bi bi-speedometer2"></i><span>Tableau de bord</span></a>
+            <a href="{{ route('admin.permit-categories.index') }}" class="sidebar-link @active('admin/permit-categories*')"><i class="bi bi-list-task"></i><span>Catégories de Permis</span></a>
             <a href="{{ route('admin.eleves.index') }}" class="sidebar-link @active('admin/eleves*')"><i class="bi bi-people-fill"></i><span>Élèves & CRM</span></a>
             <a href="{{ route('admin.documents.index') }}" class="sidebar-link @active('admin/documents*')"><i class="bi bi-folder2-open"></i><span>Documents</span></a>
             <a href="{{ route('admin.reporting.index') }}" class="sidebar-link @active('admin/reporting*')"><i class="bi bi-bar-chart-line-fill"></i><span>Reporting</span></a>

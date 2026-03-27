@@ -769,7 +769,7 @@
             });
 
             console.log('Response status:', res.status, res.statusText);
-            
+
             if (!res.ok) {
                 const errorText = await res.text();
                 console.error('Erreur serveur:', res.status, errorText);
@@ -778,11 +778,11 @@
 
             const data = await res.json();
             console.log('Données reçues:', data);
-            
+
             if (!data.questions || data.questions.length === 0) {
                 throw new Error('Aucune question disponible pour cette catégorie.');
             }
-            
+
             state.questions = data.questions;
             state.timeLimit = data.time_limit;
             state.timeLeft = data.time_limit;
@@ -882,23 +882,27 @@
             chosen: chosenIndex
         });
 
-        // Désactiver tous les boutons
+        const q = state.questions[state.current];
+        const correctIndex = q.correct_index; // disponible grâce au contrôleur modifié
         const buttons = document.querySelectorAll('.option-btn');
+
+        // Désactiver tous les boutons
         buttons.forEach(btn => btn.disabled = true);
 
-        // Mise en surbrillance de la réponse choisie
-        // (On n'a pas la bonne réponse côté client — on montre juste la sélection)
+        // Colorier immédiatement : vert = bonne réponse, rouge = mauvais choix
         buttons.forEach(btn => {
             const idx = parseInt(btn.getAttribute('data-index'));
-            if (idx === chosenIndex) {
-                btn.classList.add('correct'); // Provisoire — sera confirmé en résultats
+
+            if (idx === correctIndex) {
+                btn.classList.add('correct'); // toujours vert
+            } else if (idx === chosenIndex) {
+                btn.classList.add('wrong'); // rouge si mauvais choix
             } else {
-                btn.classList.add('dimmed');
+                btn.classList.add('dimmed'); // grisé les autres
             }
         });
 
         // Afficher explication si disponible
-        const q = state.questions[state.current];
         if (q.explication) {
             $('expliText').textContent = q.explication;
             $('expliBox').classList.add('show');

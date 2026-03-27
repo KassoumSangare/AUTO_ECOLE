@@ -15,8 +15,9 @@
     <!-- À mettre dans le <head> -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net">
 
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Open+Sans:wght@400;500;600&display=swap"
+        rel="stylesheet" />
     {{-- Font override AVANT Bootstrap --}}
     <style>
         html,
@@ -25,7 +26,7 @@
         button,
         select,
         textarea {
-            font-family: 'DM Sans', 'Helvetica Neue', Arial, sans-serif !important;
+            font-family: "Poppins", sans-serif !important;
         }
 
         h1,

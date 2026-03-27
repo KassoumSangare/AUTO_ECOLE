@@ -20,7 +20,7 @@ class HomeController extends Controller
 
         // Remplacement de la valeur statique (12547) par la logique réelle.
         // Option A : Si chaque visite = une nouvelle ligne dans la table
-        $totalVues = PageView::count();
+        $totalVues =PageView::hit('home');
 
         // Option B : Si vous avez une ligne unique avec une colonne "views" que vous incrémentez
         // $totalVues = PageView::sum('views');
