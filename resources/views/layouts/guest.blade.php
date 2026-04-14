@@ -619,8 +619,11 @@
             <div class="row align-items-center g-3">
                 <div class="col-md-6">
                     <div class="footer-brand">
-                        <div style="width:30px;height:30px;border-radius:8px;background:var(--rouge);display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:900;color:#fff;">LC</div>
-                        <span>Le <span class="dot-vert">Chemin</span></span>
+                        
+                        <a href="{{ route('home') }}" class="sidebar-brand">
+                            <img src="{{ asset('assets/images/logo.jpeg') }}" class="nav-brand-logo" alt="Logo">
+                        
+                        </a>
                     </div>
                     <div class="mt-1" style="font-size:.8rem;">
                         Abidjan, Côte d'Ivoire &nbsp;·&nbsp; &copy; {{ date('Y') }} Tous droits réservés.
