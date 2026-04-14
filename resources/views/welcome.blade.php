@@ -1442,7 +1442,7 @@
         <div class="text-center mb-5 reveal">
             <span class="section-tag">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="14" height="14" style="margin-right:4px;vertical-align:middle;">
-                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
                 </svg>
                 Processus simple
             </span>
@@ -1453,38 +1453,38 @@
         <div class="row g-4 justify-content-center align-items-start">
             @php
             $steps = [
-                [
-                    'num'   => '01',
-                    'icon'  => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
-                                    <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
-                                </svg>',
-                    'title' => 'Inscription gratuite',
-                    'desc'  => 'Créez votre compte en 2 minutes avec votre nom, prénom et numéro de téléphone. Aucun document requis pour débuter.',
-                    'badge' => 'Gratuit & instantané',
-                    'color' => 'var(--rouge)',
-                ],
-                [
-                    'num'   => '02',
-                    'icon'  => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="currentColor" width="32" height="32">
-                                    <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle"
-                                          font-family="Arial Black, sans-serif" font-size="28" font-weight="900"
-                                          fill="currentColor">W</text>
-                                </svg>',
-                    'title' => 'Paiement Wave CI',
-                    'desc'  => 'Choisissez votre catégorie de permis et réglez vos frais de formation en toute sécurité via Wave CI. Reçu PDF généré automatiquement.',
-                    'badge' => 'Paiement sécurisé',
-                    'color' => 'var(--or)',
-                ],
-                [
-                    'num'   => '03',
-                    'icon'  => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
-                                    <path d="M8 5v14l11-7z"/>
-                                </svg>',
-                    'title' => 'Formation & Examen',
-                    'desc'  => "Accédez aux vidéos, quiz interactifs et à votre coffre numérique. Suivez votre progression jusqu'au jour de l'examen.",
-                    'badge' => 'Accès illimité 24h/7',
-                    'color' => 'var(--vert)',
-                ],
+            [
+            'num' => '01',
+            'icon' => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
+                <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z" />
+            </svg>',
+            'title' => 'Inscription gratuite',
+            'desc' => 'Créez votre compte en 2 minutes avec votre nom, prénom et numéro de téléphone. Aucun document requis pour débuter.',
+            'badge' => 'Gratuit & instantané',
+            'color' => 'var(--rouge)',
+            ],
+            [
+            'num' => '02',
+            'icon' => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="currentColor" width="32" height="32">
+                <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle"
+                    font-family="Arial Black, sans-serif" font-size="28" font-weight="900"
+                    fill="currentColor">W</text>
+            </svg>',
+            'title' => 'Paiement Wave CI',
+            'desc' => 'Choisissez votre catégorie de permis et réglez vos frais de formation en toute sécurité via Wave CI. Reçu PDF généré automatiquement.',
+            'badge' => 'Paiement sécurisé',
+            'color' => 'var(--or)',
+            ],
+            [
+            'num' => '03',
+            'icon' => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
+                <path d="M8 5v14l11-7z" />
+            </svg>',
+            'title' => 'Formation & Examen',
+            'desc' => "Accédez aux vidéos, quiz interactifs et à votre coffre numérique. Suivez votre progression jusqu'au jour de l'examen.",
+            'badge' => 'Accès illimité 24h/7',
+            'color' => 'var(--vert)',
+            ],
             ];
             @endphp
 
@@ -1504,12 +1504,12 @@
 
             @if($i < count($steps) - 1)
                 <div class="col-auto d-none d-md-flex steps-connector" style="font-size:1.5rem;color:var(--texte-2);align-self:center;padding-top:2rem;">
-                    ›
-                </div>
-            @endif
-
-            @endforeach
+                ›
         </div>
+        @endif
+
+        @endforeach
+    </div>
     </div>
 </section>
 
