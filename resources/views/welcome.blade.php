@@ -1436,16 +1436,10 @@
 {{-- ═══════════════════════════════════════════════════
      4. COMMENT ÇA MARCHE
 ═══════════════════════════════════════════════════ --}}
-
 <section class="steps-section" id="comment-ca-marche" aria-label="Comment ça marche">
     <div class="container">
         <div class="text-center mb-5 reveal">
-            <span class="section-tag">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="14" height="14" style="margin-right:4px;vertical-align:middle;">
-                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
-                </svg>
-                Processus simple
-            </span>
+            <span class="section-tag"><i class="bi bi-map me-1"></i>Processus simple</span>
             <h2 class="section-title">Comment ça marche ?</h2>
             <p class="section-sub">En 3 étapes, vous passez de l'inscription à votre permis.</p>
         </div>
@@ -1453,46 +1447,17 @@
         <div class="row g-4 justify-content-center align-items-start">
             @php
             $steps = [
-            [
-            'num' => '01',
-            'icon' => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
-                <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z" />
-            </svg>',
-            'title' => 'Inscription gratuite',
-            'desc' => 'Créez votre compte en 2 minutes avec votre nom, prénom et numéro de téléphone. Aucun document requis pour débuter.',
-            'badge' => 'Gratuit & instantané',
-            'color' => 'var(--rouge)',
-            ],
-            [
-            'num' => '02',
-            'icon' => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="currentColor" width="32" height="32">
-                <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle"
-                    font-family="Arial Black, sans-serif" font-size="28" font-weight="900"
-                    fill="currentColor">W</text>
-            </svg>',
-            'title' => 'Paiement Wave CI',
-            'desc' => 'Choisissez votre catégorie de permis et réglez vos frais de formation en toute sécurité via Wave CI. Reçu PDF généré automatiquement.',
-            'badge' => 'Paiement sécurisé',
-            'color' => 'var(--or)',
-            ],
-            [
-            'num' => '03',
-            'icon' => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
-                <path d="M8 5v14l11-7z" />
-            </svg>',
-            'title' => 'Formation & Examen',
-            'desc' => "Accédez aux vidéos, quiz interactifs et à votre coffre numérique. Suivez votre progression jusqu'au jour de l'examen.",
-            'badge' => 'Accès illimité 24h/7',
-            'color' => 'var(--vert)',
-            ],
+            ['num'=>'01','img'=>'/assets/images/person-add.svg','title'=>'Inscription gratuite','desc'=>'Créez votre compte en 2 minutes avec votre nom, prénom et numéro de téléphone. Aucun document requis pour débuter.','badge'=>'Gratuit & instantané','color'=>'var(--rouge)'],
+            ['num'=>'02','img'=>'/assets/images/wave_logo.png','title'=>'Paiement Wave CI','desc'=>'Choisissez votre catégorie de permis et réglez vos frais de formation en toute sécurité via Wave CI. Reçu PDF généré automatiquement.','badge'=>'Paiement sécurisé','color'=>'var(--or)'],
+            ['num'=>'03','img'=>'/assets/images/display-fill.svg','title'=>'Formation & Examen','desc'=>'Accédez aux vidéos, quiz interactifs et à votre coffre numérique. Suivez votre progression jusqu\'au jour de l\'examen.','badge'=>'Accès illimité 24h/7','color'=>'var(--vert)'],
             ];
             @endphp
 
             @foreach($steps as $i => $step)
             <div class="col-md-4 reveal" style="transition-delay:{{ $i * 0.15 }}s">
                 <div class="step-card">
-                    <div class="step-num" style="background:linear-gradient(135deg,{{ $step['color'] }},{{ $step['color'] }}dd);color:#fff;display:flex;align-items:center;justify-content:center;">
-                        {!! $step['icon'] !!}
+                    <div class="step-num" style="background:linear-gradient(135deg,{{ $step['color'] }},{{ $step['color'] }}dd);">
+                        <img src="{{ $step['img'] }}" alt="{{ $step['title'] }}" style="width:40px; height:40px; object-fit:contain;">
                     </div>
                     <h3 class="step-title">{{ $step['title'] }}</h3>
                     <p class="step-desc">{{ $step['desc'] }}</p>
@@ -1501,18 +1466,15 @@
                     </span>
                 </div>
             </div>
-
-            @if($i < count($steps) - 1)
-                <div class="col-auto d-none d-md-flex steps-connector" style="font-size:1.5rem;color:var(--texte-2);align-self:center;padding-top:2rem;">
-                ›
+            @if($i < count($steps)-1)
+                <div class="col-auto d-none d-md-flex steps-connector">
+                <i class="bi bi-chevron-right"></i>
         </div>
         @endif
-
         @endforeach
     </div>
     </div>
 </section>
-
 
 {{-- ═══════════════════════════════════════════════════
      5. FEATURES
@@ -1879,7 +1841,7 @@
                                 <h3 class="info-card-title">Contact</h3>
                             </div>
                             <div class="info-card-body">
-                                <a href="tel:+2250545160597" class="contact-row">
+                                <a href="tel:+2252724318838" class="contact-row">
                                     <div class="contact-row-icon" style="background:var(--vert);"><i class="bi bi-telephone-fill"></i></div>
                                     <span class="contact-row-text">+225 27 24 31 88 38</span>
                                 </a>
@@ -1972,7 +1934,7 @@
                 <a href="{{ route('register') }}" class="btn-hero-primary" style="font-size:1.05rem;padding:1rem 2.5rem;">
                     <i class="bi bi-rocket-takeoff-fill" style="color:var(--vert);"></i>Créer mon compte gratuitement
                 </a>
-                <a href="https://wa.me/2250545160597?text=Bonjour%2C%20je%20souhaite%20des%20informations%20sur%20la%20formation."
+                <a href="https://wa.me/2252724318838?text=Bonjour%2C%20je%20souhaite%20des%20informations%20sur%20la%20formation."
                     target="_blank"
                     style="background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.35);color:#fff;font-size:1rem;padding:.95rem 2rem;border-radius:12px;text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;font-weight:700;transition:.25s ease;">
                     <i class="bi bi-whatsapp" style="color:#25D366;"></i>Nous contacter

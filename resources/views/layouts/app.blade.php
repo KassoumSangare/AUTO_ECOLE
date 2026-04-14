@@ -735,12 +735,15 @@
             font-family: 'Syne', Georgia, serif !important;
         }
     </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  
+
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <!-- À mettre dans le <head> -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net">
+
 
     <style>
         /* ══ PALETTE Le Chemin — Adoucie & Fluide ══════════ */
@@ -771,24 +774,25 @@
             min-height: 100vh;
             font-family: var(--font-b) !important;
         }
-              .nav-brand-logo {
-    width: 60px;
-    height: 55px;
-    border-radius: 10px;
-    background: #fff;
-    
-    /* Empêche la déformation de l'image */
-    object-fit: cover; 
-    
-    /* Optionnel : si l'image a un fond transparent ou doit être centrée */
-    object-position: center;
-    
-    /* Garde tes propriétés de structure */
-    flex-shrink: 0;
-    
-    /* Pour l'esthétique */
-    border: 1px solid rgba(0,0,0,0.05); 
-}
+
+        .nav-brand-logo {
+            width: 60px;
+            height: 55px;
+            border-radius: 10px;
+            background: #fff;
+
+            /* Empêche la déformation de l'image */
+            object-fit: cover;
+
+            /* Optionnel : si l'image a un fond transparent ou doit être centrée */
+            object-position: center;
+
+            /* Garde tes propriétés de structure */
+            flex-shrink: 0;
+
+            /* Pour l'esthétique */
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
 
 
         /* ══ SIDEBAR ═══════════════════════════════════════ */
@@ -1076,7 +1080,7 @@
     {{-- ══ SIDEBAR ══ --}}
     <aside class="sidebar" id="sidebar" aria-label="Navigation latérale">
         <a href="{{ route('home') }}" class="sidebar-brand">
-     <img src="{{ asset('assets/images/logo.jpeg') }}" class="nav-brand-logo" alt="Logo">
+            <img src="{{ asset('assets/images/logo.jpeg') }}" class="nav-brand-logo" alt="Logo">
             <div class="brand-name">Le <span>Chemin</span></div>
         </a>
 
