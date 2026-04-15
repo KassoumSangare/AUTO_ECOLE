@@ -55,8 +55,8 @@
             <div class="payment-hero">
                 <div style="position:relative; z-index:1;">
                     <div style="font-size:.8rem; text-transform:uppercase; letter-spacing:.1em; opacity:.6; margin-bottom:.5rem;">Frais d'inscription</div>
-                    <div class="amount-display">50 000</div>
-                    <div class="amount-label">Francs CFA (XOF) — Paiement unique</div>
+                    <div class="amount-display">30 000</div>
+                    <div class="amount-label">Francs CFA (XOF)</div>
                 </div>
             </div>
             <div class="payment-body">

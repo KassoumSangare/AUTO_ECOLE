@@ -1542,20 +1542,20 @@
                     </div>
 
                     {{-- Affichage dynamique --}}
-                    <div class="pricing-name" id="categoryName">{{ $categories->first()->name }}</div>
-                    <div class="pricing-description" id="categoryDescription">{{ $categories->first()->description }}</div>
+                    <div class="pricing-name" id="categoryName">{{ $categories->first()?->name ?? 'Aucune catégorie' }}</div>
+                    <div class="pricing-description" id="categoryDescription">{{ $categories->first()?->description ?? 'Sélectionnez une catégorie ci-dessus' }}</div>
 
                     <div class="pricing-price-container">
                         <div class="pricing-original-price" id="originalPrice">
-                            Prix normal : <span id="originalPriceValue">{{ number_format($categories->first()->price, 0, ',', ' ') }}</span> XOF
+                            Prix normal : <span id="originalPriceValue">{{ number_format($categories->first()?->price ?? 0, 0, ',', ' ') }}</span> XOF
                         </div>
                         <div class="pricing-discount-badge">
                             <i class="bi bi-percent"></i>
-                            <span id="discountPercent">{{ $categories->first()->online_discount_percent }}</span>% de réduction en ligne
+                            <span id="discountPercent">{{ $categories->first()?->online_discount_percent ?? 0 }}</span>% de réduction en ligne
                         </div>
                         <div class="pricing-price-row">
                             <div class="pricing-price">
-                                <sup>CFA</sup><span id="discountedPrice">{{ number_format($categories->first()->discounted_price, 0, ',', ' ') }}</span>
+                                <sup>CFA</sup><span id="discountedPrice">{{ number_format($categories->first()?->discounted_price ?? 0, 0, ',', ' ') }}</span>
                             </div>
                             <div class="pricing-currency">XOF</div>
                         </div>

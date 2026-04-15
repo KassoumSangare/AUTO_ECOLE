@@ -23,6 +23,9 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->validateCsrfTokens(except: [
             'webhook/wave',
         ]);
+        $middleware->alias([
+            'verify.wave.signature' => \App\Http\Middleware\VerifyWaveSignature::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

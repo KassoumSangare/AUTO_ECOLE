@@ -75,6 +75,25 @@ Route::middleware(['auth'])->prefix('espace-eleve')->name('eleve.')->group(funct
     Route::delete('/documents/{document}', [DocumentController::class, 'destroy'])->name('documents.destroy');
 });
 
+Route::middleware(['auth'])->prefix('payment')->group(function () {
+    Route::get('/', [PaymentController::class, 'index'])->name('payment.index');
+    Route::post('/initiate', [PaymentController::class, 'initiate'])->name('payment.initiate');
+    Route::get('/success/{order}', [PaymentController::class, 'success'])->name('payment.success');
+    Route::get('/error/{order}', [PaymentController::class, 'error'])->name('payment.error');
+    Route::get('/history', [PaymentController::class, 'history'])->name('payment.history');
+    Route::get('/receipt/{order}', [PaymentController::class, 'downloadReceipt'])->name('payment.receipt');
+    Route::get('/check-status/{order}', [PaymentController::class, 'checkStatus'])->name('payment.check-status');
+});
+
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/payments', [DashboardController::class, 'payments'])->name('payments.index');
+    Route::get('/payments/{order}', [DashboardController::class, 'paymentDetails'])->name('payments.show');
+    Route::get('/payments/export', [DashboardController::class, 'exportPayments'])->name('payments.export');
+    Route::post('/payments/{order}/resend-receipt', [DashboardController::class, 'resendReceipt'])->name('payments.resend');
+    Route::post('/payments/{order}/mark-succeeded', [DashboardController::class, 'markAsSucceeded'])->name('payments.mark-succeeded');
+});
+
 // Webhook Wave (hors auth — requête serveur externe)
 Route::post('/webhook/wave', [PaymentController::class, 'webhook'])
     ->name('webhook.wave')
