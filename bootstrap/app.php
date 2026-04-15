@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Middleware\EnsureHasPaid;
+use App\Http\Middleware\EnsureIsAdmin;
+use App\Http\Middleware\VerifyWaveSignature;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -13,18 +16,14 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
 
-        // ── Enregistrement des alias ──
         $middleware->alias([
-            'admin' => \App\Http\Middleware\EnsureIsAdmin::class,
-            'paid'  => \App\Http\Middleware\EnsureHasPaid::class,
+            'admin' => EnsureIsAdmin::class,
+            'paid'  => EnsureHasPaid::class,
+            'verify.wave.signature' => VerifyWaveSignature::class,
         ]);
 
-        // ── Exclusion CSRF ──
         $middleware->validateCsrfTokens(except: [
             'webhook/wave',
-        ]);
-        $middleware->alias([
-            'verify.wave.signature' => \App\Http\Middleware\VerifyWaveSignature::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
