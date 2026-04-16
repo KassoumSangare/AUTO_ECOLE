@@ -15,13 +15,14 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-
+        // Définition des alias de middleware
         $middleware->alias([
-            'admin' => EnsureIsAdmin::class,
-            'paid'  => EnsureHasPaid::class,
+            'admin'                 => EnsureIsAdmin::class,
+            'paid'                  => EnsureHasPaid::class,
             'verify.wave.signature' => VerifyWaveSignature::class,
         ]);
 
+        // Exclusion du CSRF pour les webhooks
         $middleware->validateCsrfTokens(except: [
             'webhook/wave',
         ]);

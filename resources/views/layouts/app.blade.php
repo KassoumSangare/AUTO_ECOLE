@@ -738,7 +738,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-  
+
 
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <!-- À mettre dans le <head> -->
@@ -1086,45 +1086,73 @@
 
         <nav class="sidebar-nav" aria-label="Menu principal">
             @if(auth()->user()->isAdmin())
+            {{-- MENU ADMIN --}}
             <div class="sidebar-label">Administration</div>
-            <a href="{{ route('admin.dashboard') }}" class="sidebar-link @active('admin/tableau*')"><i class="bi bi-speedometer2"></i><span>Tableau de bord</span></a>
-            <a href="{{ route('admin.permit-categories.index') }}" class="sidebar-link @active('admin/permit-categories*')"><i class="bi bi-list-task"></i><span>Catégories de Permis</span></a>
-            <a href="{{ route('admin.eleves.index') }}" class="sidebar-link @active('admin/eleves*')"><i class="bi bi-people-fill"></i><span>Élèves & CRM</span></a>
-            <a href="{{ route('admin.documents.index') }}" class="sidebar-link @active('admin/documents*')"><i class="bi bi-folder2-open"></i><span>Documents</span></a>
-            <a href="{{ route('admin.reporting.index') }}" class="sidebar-link @active('admin/reporting*')"><i class="bi bi-bar-chart-line-fill"></i><span>Reporting</span></a>
+            <a href="{{ route('admin.dashboard') }}" class="sidebar-link @active('admin/tableau*')">
+                <i class="bi bi-speedometer2"></i><span>Tableau de bord</span>
+            </a>
+            <a href="{{ route('admin.permit-categories.index') }}" class="sidebar-link @active('admin/permit-categories*')">
+                <i class="bi bi-list-task"></i><span>Catégories</span>
+            </a>
+            <a href="{{ route('admin.eleves.index') }}" class="sidebar-link @active('admin/eleves*')">
+                <i class="bi bi-people-fill"></i><span>Élèves & CRM</span>
+            </a>
+            <a href="{{ route('admin.documents.index') }}" class="sidebar-link @active('admin/documents*')">
+                <i class="bi bi-folder2-open"></i><span>Documents</span>
+            </a>
+            <a href="{{ route('admin.reporting.index') }}" class="sidebar-link @active('admin/reporting*')">
+                <i class="bi bi-bar-chart-line-fill"></i><span>Reporting</span>
+            </a>
+
+            <div class="sidebar-label">Paramètres</div>
+            <a href="{{ route('profile.edit') }}" class="sidebar-link @active('profile*')">
+                <i class="bi bi-person-circle"></i><span>Mon Profil</span>
+            </a>
+
             @else
+            {{-- MENU ÉLÈVE --}}
             <div class="sidebar-label">Mon parcours</div>
-            <a href="{{ route('eleve.dashboard') }}" class="sidebar-link @active('espace-eleve/tableau*')"><i class="bi bi-house-fill"></i><span>Tableau de bord</span></a>
+            <a href="{{ route('eleve.dashboard') }}" class="sidebar-link @active('espace-eleve/tableau*')">
+                <i class="bi bi-house-fill"></i><span>Tableau de bord</span>
+            </a>
             <a href="{{ route('eleve.payment') }}" class="sidebar-link @active('espace-eleve/paiement*')">
                 <i class="bi bi-credit-card-fill"></i><span>Paiement</span>
                 @if(!auth()->user()->hasPaid())<span class="notif-dot"></span>@endif
             </a>
-            <a href="{{ route('eleve.mediatheque') }}" class="sidebar-link @active('espace-eleve/mediatheque*')"><i class="bi bi-play-circle-fill"></i><span>Médiathèque</span></a>
-            <a href="{{ route('eleve.quiz') }}" class="sidebar-link @active('espace-eleve/quiz*')"><i class="bi bi-patch-question-fill"></i><span>Quiz QCM</span></a>
-            <a href="{{ route('eleve.documents') }}" class="sidebar-link @active('espace-eleve/documents*')"><i class="bi bi-file-earmark-arrow-up-fill"></i><span>Mes documents</span></a>
-            @if(Route::has('eleve.profile'))
-            <a href="{{ route('eleve.profile') }}" class="sidebar-link @active('espace-eleve/profil*')"><i class="bi bi-person-circle"></i><span>Mon profil</span></a>
-            @endif
+            <a href="{{ route('eleve.mediatheque') }}" class="sidebar-link @active('espace-eleve/mediatheque*')">
+                <i class="bi bi-play-circle-fill"></i><span>Médiathèque</span>
+            </a>
+            <a href="{{ route('eleve.quiz') }}" class="sidebar-link @active('espace-eleve/quiz*')">
+                <i class="bi bi-patch-question-fill"></i><span>Quiz QCM</span>
+            </a>
+            <a href="{{ route('eleve.documents') }}" class="sidebar-link @active('espace-eleve/documents*')">
+                <i class="bi bi-file-earmark-arrow-up-fill"></i><span>Mes documents</span>
+            </a>
+
+            <div class="sidebar-label">Compte</div>
+            <a href="{{ route('profile.edit') }}" class="sidebar-link @active('profile*')">
+                <i class="bi bi-person-circle"></i><span>Mon profil</span>
+            </a>
             @endif
         </nav>
 
         <div class="sidebar-footer">
             <div class="user-chip mb-2">
-                <div class="user-avatar">{{ strtoupper(substr(auth()->user()->prenom,0,1)) }}</div>
-                <div style="min-width:0;">
-                    <div style="font-weight:700;font-size:.82rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#fff;">{{ auth()->user()->nom_complet }}</div>
-                    <div style="font-size:.71rem;color:rgba(255,255,255,.45);">{{ auth()->user()->telephone }}</div>
+                <div class="user-avatar">{{ strtoupper(substr(auth()->user()->prenom, 0, 1)) }}</div>
+                <div class="user-info">
+                    <div class="user-name">{{ auth()->user()->nom_complet }}</div>
+                    <div class="user-phone">{{ auth()->user()->telephone }}</div>
                 </div>
             </div>
+
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
-                <button class="btn btn-sm w-100" style="background:rgba(255,255,255,.08);color:rgba(255,255,255,.75);font-size:.8rem;border-radius:8px;border:none;display:flex;align-items:center;justify-content:center;gap:.4rem;transition:var(--trans);">
-                    <i class="bi bi-box-arrow-left"></i>Déconnexion
+                <button type="submit" class="logout-btn">
+                    <i class="bi bi-box-arrow-left"></i><span>Déconnexion</span>
                 </button>
             </form>
         </div>
     </aside>
-
     <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
     {{-- ══ MAIN ══ --}}

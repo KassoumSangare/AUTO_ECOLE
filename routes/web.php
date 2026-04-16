@@ -1,29 +1,30 @@
 <?php
 
-use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\Admin\PermitCategoryController;
-use App\Http\Controllers\Eleve\DashboardController;
-use App\Http\Controllers\Eleve\MediathequeController;
-use App\Http\Controllers\Eleve\QuizController;
-use App\Http\Controllers\Eleve\DocumentController;
-use App\Http\Controllers\Eleve\PaymentController;
 use App\Http\Controllers\Admin\AdminDashboardController;
-use App\Http\Controllers\Admin\EleveController;
 use App\Http\Controllers\Admin\AdminDocumentController;
+use App\Http\Controllers\Admin\EleveController;
+use App\Http\Controllers\Admin\PermitCategoryController;
 use App\Http\Controllers\Admin\ReportingController;
+use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Eleve\DashboardController;
+use App\Http\Controllers\Eleve\DocumentController;
+use App\Http\Controllers\Eleve\MediathequeController;
+use App\Http\Controllers\Eleve\PaymentController;
+use App\Http\Controllers\Eleve\ProfileController as EleveProfileController;
+use App\Http\Controllers\Eleve\QuizController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 
 // ══════════════════════════════════════════════════════
 //  ROUTES PUBLIQUES
 // ══════════════════════════════════════════════════════
-
 Route::get('/', [HomeController::class, 'index'])->name('home');
-// API pour récupérer les détails d'une catégorie (utilisé par le JS)
 Route::get('/api/categories/{code}', [HomeController::class, 'getCategory'])->name('api.category.show');
 
 // ──────────────────────────────────────────
-//  AUTHENTIFICATION (invités seulement)
+//  AUTHENTIFICATION
 // ──────────────────────────────────────────
 Route::middleware('guest')->group(function () {
     Route::get('/inscription',  [AuthController::class, 'showRegister'])->name('register');
@@ -37,119 +38,104 @@ Route::post('/deconnexion', [AuthController::class, 'logout'])
     ->middleware('auth')
     ->name('logout');
 
+
+// ══════════════════════════════════════════════════════
+//  WEBHOOK WAVE (Hors Auth et CSRF)
+// ══════════════════════════════════════════════════════
+Route::post('/webhook/wave', [PaymentController::class, 'webhook'])
+    ->name('webhook.wave')
+    ->withoutMiddleware([VerifyCsrfToken::class]);
+
+
 // ══════════════════════════════════════════════════════
 //  ESPACE ÉLÈVE (auth requis)
 // ══════════════════════════════════════════════════════
-
 Route::middleware(['auth'])->prefix('espace-eleve')->name('eleve.')->group(function () {
 
-    // Dashboard (accessible sans paiement)
+    // Tableau de bord
     Route::get('/tableau-de-bord', [DashboardController::class, 'index'])->name('dashboard');
 
-    // Tunnel de paiement (accessible sans paiement, pour payer justement)
+    // Tunnel de paiement
     Route::get('/paiement',              [PaymentController::class, 'index'])->name('payment');
     Route::post('/paiement/initier',     [PaymentController::class, 'initiate'])->name('payment.initiate');
     Route::get('/paiement/succes',       [PaymentController::class, 'success'])->name('payment.success');
     Route::get('/recu/{payment}',        [PaymentController::class, 'downloadReceipt'])->name('payment.receipt');
 
-    // Webhook Wave (pas de middleware auth — appelé par le serveur Wave)
-    // Note: Ce webhook est déclaré en dehors du groupe auth ci-dessous
+    // Apprentissage & Documents
+    Route::get('/mediatheque',           [MediathequeController::class, 'index'])->name('mediatheque');
+    Route::get('/quiz/questions',        [QuizController::class, 'getQuestions'])->name('quiz.questions');
+    Route::get('/quiz',                  [QuizController::class, 'index'])->name('quiz');
+    Route::post('/quiz/score',           [QuizController::class, 'storeScore'])->name('quiz.store');
 
-    // ── Accès subordonné au paiement ──────────────
-    // Route::middleware('paid')->group(function () {
-    //     Route::get('/mediatheque',          [MediathequeController::class, 'index'])->name('mediatheque');
-    //     Route::get('/quiz',                 [QuizController::class, 'index'])->name('quiz');
-    //     Route::post('/quiz/score',          [QuizController::class, 'storeScore'])->name('quiz.store');
-    //     Route::get('/documents',            [DocumentController::class, 'index'])->name('documents');
-    //     Route::post('/documents',           [DocumentController::class, 'store'])->name('documents.store');
-    //     Route::delete('/documents/{document}', [DocumentController::class, 'destroy'])->name('documents.destroy');
-    // });
-
-    Route::get('/mediatheque',          [MediathequeController::class, 'index'])->name('mediatheque');
-    Route::get('/quiz/questions',       [QuizController::class, 'getQuestions'])->name('quiz.questions');
-    Route::get('/quiz',                 [QuizController::class, 'index'])->name('quiz');
-    Route::post('/quiz/score',          [QuizController::class, 'storeScore'])->name('quiz.store');
-    Route::get('/documents',            [DocumentController::class, 'index'])->name('documents');
-    Route::post('/documents',           [DocumentController::class, 'store'])->name('documents.store');
+    Route::get('/documents',             [DocumentController::class, 'index'])->name('documents');
+    Route::post('/documents',            [DocumentController::class, 'store'])->name('documents.store');
     Route::get('/documents/{document}/telecharger', [DocumentController::class, 'download'])->name('documents.download');
     Route::delete('/documents/{document}', [DocumentController::class, 'destroy'])->name('documents.destroy');
+
+    // Profil Élève
+    Route::get('/profil',                [EleveProfileController::class, 'index'])->name('profile');
+    Route::patch('/profil',              [EleveProfileController::class, 'update'])->name('profile.update');
+    Route::patch('/profil/password',     [EleveProfileController::class, 'updatePassword'])->name('profile.password');
 });
 
+// Ancien groupe de paiement (nettoyé et gardé si tu utilises ces routes spécifiques)
 Route::middleware(['auth'])->prefix('payment')->group(function () {
-    Route::get('/', [PaymentController::class, 'index'])->name('payment.index');
-    Route::post('/initiate', [PaymentController::class, 'initiate'])->name('payment.initiate');
-    Route::get('/success/{order}', [PaymentController::class, 'success'])->name('payment.success');
-    Route::get('/error/{order}', [PaymentController::class, 'error'])->name('payment.error');
     Route::get('/history', [PaymentController::class, 'history'])->name('payment.history');
-    Route::get('/receipt/{order}', [PaymentController::class, 'downloadReceipt'])->name('payment.receipt');
     Route::get('/check-status/{order}', [PaymentController::class, 'checkStatus'])->name('payment.check-status');
+    Route::get('/error/{order}', [PaymentController::class, 'error'])->name('payment.error');
 });
 
-Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/payments', [DashboardController::class, 'payments'])->name('payments.index');
-    Route::get('/payments/{order}', [DashboardController::class, 'paymentDetails'])->name('payments.show');
-    Route::get('/payments/export', [DashboardController::class, 'exportPayments'])->name('payments.export');
-    Route::post('/payments/{order}/resend-receipt', [DashboardController::class, 'resendReceipt'])->name('payments.resend');
-    Route::post('/payments/{order}/mark-succeeded', [DashboardController::class, 'markAsSucceeded'])->name('payments.mark-succeeded');
-});
-
-// Webhook Wave (hors auth — requête serveur externe)
-Route::post('/webhook/wave', [PaymentController::class, 'webhook'])
-    ->name('webhook.wave')
-    ->withoutMiddleware([\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class]);
 
 // ══════════════════════════════════════════════════════
-//  BACK-OFFICE ADMIN
+//  BACK-OFFICE ADMIN (auth + admin)
 // ══════════════════════════════════════════════════════
-
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/tableau-de-bord',          [AdminDashboardController::class, 'index'])->name('dashboard');
+
+    // Dashboard Admin
+    Route::get('/tableau-de-bord',       [AdminDashboardController::class, 'index'])->name('dashboard');
+
+    // Gestion des paiements (Admin)
+    Route::get('/payments',              [AdminDashboardController::class, 'payments'])->name('payments.index');
+    Route::get('/payments/export',       [AdminDashboardController::class, 'exportPayments'])->name('payments.export');
+    Route::get('/payments/{order}',      [AdminDashboardController::class, 'paymentDetails'])->name('payments.show');
+    Route::post('/payments/{order}/resend-receipt', [AdminDashboardController::class, 'resendReceipt'])->name('payments.resend');
+    Route::post('/payments/{order}/mark-succeeded', [AdminDashboardController::class, 'markAsSucceeded'])->name('payments.mark-succeeded');
 
     // CRM Élèves
-    Route::get('/eleves',                   [EleveController::class, 'index'])->name('eleves.index');
-    Route::get('/eleves/export',            [EleveController::class, 'export'])->name('eleves.export');
-    Route::get('/eleves/{user}',            [EleveController::class, 'show'])->name('eleves.show');
+    Route::get('/eleves',                [EleveController::class, 'index'])->name('eleves.index');
+    Route::get('/eleves/export',         [EleveController::class, 'export'])->name('eleves.export');
+    Route::get('/eleves/{user}',         [EleveController::class, 'show'])->name('eleves.show');
 
     // Gestion documents
-    Route::get('/documents',                [AdminDocumentController::class, 'index'])->name('documents.index');
-    Route::patch('/documents/{document}',   [AdminDocumentController::class, 'updateStatus'])->name('documents.status');
-    Route::get('/documents/impression',     [AdminDocumentController::class, 'printAll'])->name('documents.print');
+    Route::get('/documents',             [AdminDocumentController::class, 'index'])->name('documents.index');
+    Route::get('/documents/impression',  [AdminDocumentController::class, 'printAll'])->name('documents.print');
+    Route::get('/documents/{document}/download', [AdminDocumentController::class, 'download'])->name('documents.download');
+    Route::patch('/documents/{document}', [AdminDocumentController::class, 'updateStatus'])->name('documents.status');
 
     // Reporting financier
-    Route::get('/reporting',                [ReportingController::class, 'index'])->name('reporting.index');
-    Route::get('/reporting/export',         [ReportingController::class, 'exportExcel'])->name('reporting.export');
+    Route::get('/reporting',             [ReportingController::class, 'index'])->name('reporting.index');
+    Route::get('/reporting/export',      [ReportingController::class, 'exportExcel'])->name('reporting.export');
 
-    // CRUD complet pour les catégories de permis
+    // Catégories de permis
     Route::resource('permit-categories', PermitCategoryController::class);
-
-    // Route pour activer/désactiver une catégorie (AJAX)
-    Route::post('permit-categories/{permitCategory}/toggle-active', [PermitCategoryController::class, 'toggleActive'])
-        ->name('permit-categories.toggle-active');
+    Route::post('permit-categories/{permitCategory}/toggle-active', [PermitCategoryController::class, 'toggleActive'])->name('permit-categories.toggle-active');
 });
+
+// ──────────────────────────────────────────
+//  PROFIL ADMIN (Hors du prefixe de nom "admin.")
+// ──────────────────────────────────────────
+// pour que la route s'appelle exactement "profile.edit".
+Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
+    Route::get('/profile',               [AdminProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('/profile',               [AdminProfileController::class, 'update'])->name('profile.update');
+    Route::put('/profile/password',      [AdminProfileController::class, 'updatePassword'])->name('profile.updatePassword');
+});
+
 
 // ══════════════════════════════════════════════════════
 //  API INTERNES (JSON — appelées par Fetch/AJAX)
 // ══════════════════════════════════════════════════════
-
 Route::middleware(['auth'])->prefix('api')->name('api.')->group(function () {
-    Route::get('/quiz/questions', [QuizController::class, 'getQuestions'])->name('quiz.questions');
-    Route::post('/quiz/score',    [QuizController::class, 'storeScore'])->name('quiz.score');
-});
-
-// Route téléchargement document admin (hors groupe pour le binding)
-Route::middleware(['auth', 'admin'])
-    ->get('/admin/documents/{document}/download', [AdminDocumentController::class, 'download'])
-    ->name('admin.documents.download');
-
-Route::middleware(['auth', 'admin'])
-    ->get('/admin/documents/impression', [AdminDocumentController::class, 'printAll'])
-    ->name('admin.documents.print');
-
-// ── Profil élève ──────────────────────────────────────
-Route::middleware(['auth'])->group(function () {
-    Route::get('/espace-eleve/profil',           [\App\Http\Controllers\Eleve\ProfileController::class, 'index'])->name('eleve.profile');
-    Route::patch('/espace-eleve/profil',         [\App\Http\Controllers\Eleve\ProfileController::class, 'update'])->name('eleve.profile.update');
-    Route::patch('/espace-eleve/profil/password', [\App\Http\Controllers\Eleve\ProfileController::class, 'updatePassword'])->name('eleve.profile.password');
-    // Route documents.download → définie dans le groupe eleve. (eleve.documents.download)
+    Route::get('/quiz/questions',        [QuizController::class, 'getQuestions'])->name('quiz.questions');
+    Route::post('/quiz/score',           [QuizController::class, 'storeScore'])->name('quiz.score');
 });
