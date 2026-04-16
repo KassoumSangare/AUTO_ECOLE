@@ -109,7 +109,8 @@
     .form-ctrl {
         border: 1.5px solid var(--border);
         border-radius: 10px;
-        padding: .7rem 1rem .7rem 2.75rem;
+        /* Padding modifié : 2.75rem à droite pour laisser la place à l'œil */
+        padding: .7rem 2.75rem .7rem 2.75rem;
         font-size: .93rem;
         width: 100%;
         background: var(--blanc);
@@ -131,7 +132,7 @@
         position: relative;
     }
 
-    .icon-group .bi {
+    .icon-group>.bi:not(.bi-eye-fill):not(.bi-eye-slash-fill) {
         position: absolute;
         left: 1rem;
         top: 50%;
@@ -139,6 +140,26 @@
         color: var(--texte-2);
         font-size: 1rem;
         pointer-events: none;
+    }
+
+    /* Nouveau style pour le bouton d'affichage du mot de passe */
+    .btn-toggle-password {
+        position: absolute;
+        right: 0.5rem;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        color: var(--texte-2);
+        padding: 0.5rem;
+        cursor: pointer;
+        outline: none;
+        transition: color 0.2s;
+    }
+
+    .btn-toggle-password:hover,
+    .btn-toggle-password:focus {
+        color: var(--rouge);
     }
 
     .btn-login {
@@ -245,6 +266,11 @@
                                 <input type="password" id="password" name="password"
                                     class="form-ctrl @error('password') err @enderror"
                                     placeholder="••••••••" autocomplete="current-password">
+
+                                {{-- Bouton d'affichage du mot de passe ajouté ici --}}
+                                <button type="button" class="btn-toggle-password" id="togglePassword" tabindex="-1" aria-label="Afficher le mot de passe">
+                                    <i class="bi bi-eye-fill" id="toggleIcon"></i>
+                                </button>
                             </div>
                             @error('password')<div class="err-msg">{{ $message }}</div>@enderror
                         </div>
@@ -270,4 +296,30 @@
         </div>
     </div>
 </section>
+
+{{-- Script pour gérer l'affichage du mot de passe --}}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('password');
+        const toggleIcon = document.getElementById('toggleIcon');
+
+        togglePassword.addEventListener('click', function() {
+            // Bascule le type de l'input (password <-> text)
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+
+            // Bascule l'icône (œil ouvert <-> œil barré)
+            toggleIcon.classList.toggle('bi-eye-fill');
+            toggleIcon.classList.toggle('bi-eye-slash-fill');
+
+            // Ajustement de l'accessibilité
+            if (type === 'text') {
+                togglePassword.setAttribute('aria-label', 'Masquer le mot de passe');
+            } else {
+                togglePassword.setAttribute('aria-label', 'Afficher le mot de passe');
+            }
+        });
+    });
+</script>
 @endsection
