@@ -743,7 +743,11 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <!-- À mettre dans le <head> -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net">
+    <meta name="theme-color" content="#C8102E">
 
+    {{-- Favicon --}}
+    <link rel="icon" type="image/jpeg" href="{{ asset('assets/images/logo.jpeg') }}">
+    <link rel="apple-touch-icon" href="{{ asset('assets/images/logo.jpeg') }}">
 
     <style>
         /* ══ PALETTE Le Chemin — Adoucie & Fluide ══════════ */
@@ -1086,53 +1090,54 @@
 
         <nav class="sidebar-nav" aria-label="Menu principal">
             @if(auth()->user()->isAdmin())
-            {{-- MENU ADMIN --}}
-            <div class="sidebar-label">Administration</div>
-            <a href="{{ route('admin.dashboard') }}" class="sidebar-link @active('admin/tableau*')">
-                <i class="bi bi-speedometer2"></i><span>Tableau de bord</span>
-            </a>
-            <a href="{{ route('admin.permit-categories.index') }}" class="sidebar-link @active('admin/permit-categories*')">
-                <i class="bi bi-list-task"></i><span>Catégories</span>
-            </a>
-            <a href="{{ route('admin.eleves.index') }}" class="sidebar-link @active('admin/eleves*')">
-                <i class="bi bi-people-fill"></i><span>Élèves & CRM</span>
-            </a>
-            <a href="{{ route('admin.documents.index') }}" class="sidebar-link @active('admin/documents*')">
-                <i class="bi bi-folder2-open"></i><span>Documents</span>
-            </a>
-            <a href="{{ route('admin.reporting.index') }}" class="sidebar-link @active('admin/reporting*')">
-                <i class="bi bi-bar-chart-line-fill"></i><span>Reporting</span>
-            </a>
+                {{-- MENU ADMIN --}}
+                <div class="sidebar-label">Administration</div>
+                <a href="{{ route('admin.dashboard') }}" class="sidebar-link @active('admin/tableau*')">
+                    <i class="bi bi-speedometer2"></i><span>Tableau de bord</span>
+                </a>
+                <a href="{{ route('admin.permit-categories.index') }}"
+                    class="sidebar-link @active('admin/permit-categories*')">
+                    <i class="bi bi-list-task"></i><span>Catégories</span>
+                </a>
+                <a href="{{ route('admin.eleves.index') }}" class="sidebar-link @active('admin/eleves*')">
+                    <i class="bi bi-people-fill"></i><span>Élèves & CRM</span>
+                </a>
+                <a href="{{ route('admin.documents.index') }}" class="sidebar-link @active('admin/documents*')">
+                    <i class="bi bi-folder2-open"></i><span>Documents</span>
+                </a>
+                <a href="{{ route('admin.reporting.index') }}" class="sidebar-link @active('admin/reporting*')">
+                    <i class="bi bi-bar-chart-line-fill"></i><span>Reporting</span>
+                </a>
 
-            <div class="sidebar-label">Paramètres</div>
-            <a href="{{ route('profile.edit') }}" class="sidebar-link @active('profile*')">
-                <i class="bi bi-person-circle"></i><span>Mon Profil</span>
-            </a>
+                <div class="sidebar-label">Paramètres</div>
+                <a href="{{ route('profile.edit') }}" class="sidebar-link @active('profile*')">
+                    <i class="bi bi-person-circle"></i><span>Mon Profil</span>
+                </a>
 
             @else
-            {{-- MENU ÉLÈVE --}}
-            <div class="sidebar-label">Mon parcours</div>
-            <a href="{{ route('eleve.dashboard') }}" class="sidebar-link @active('espace-eleve/tableau*')">
-                <i class="bi bi-house-fill"></i><span>Tableau de bord</span>
-            </a>
-            <a href="{{ route('eleve.payment') }}" class="sidebar-link @active('espace-eleve/paiement*')">
-                <i class="bi bi-credit-card-fill"></i><span>Paiement</span>
-                @if(!auth()->user()->hasPaid())<span class="notif-dot"></span>@endif
-            </a>
-            <a href="{{ route('eleve.mediatheque') }}" class="sidebar-link @active('espace-eleve/mediatheque*')">
-                <i class="bi bi-play-circle-fill"></i><span>Médiathèque</span>
-            </a>
-            <a href="{{ route('eleve.quiz') }}" class="sidebar-link @active('espace-eleve/quiz*')">
-                <i class="bi bi-patch-question-fill"></i><span>Quiz QCM</span>
-            </a>
-            <a href="{{ route('eleve.documents') }}" class="sidebar-link @active('espace-eleve/documents*')">
-                <i class="bi bi-file-earmark-arrow-up-fill"></i><span>Mes documents</span>
-            </a>
+                {{-- MENU ÉLÈVE --}}
+                <div class="sidebar-label">Mon parcours</div>
+                <a href="{{ route('eleve.dashboard') }}" class="sidebar-link @active('espace-eleve/tableau*')">
+                    <i class="bi bi-house-fill"></i><span>Tableau de bord</span>
+                </a>
+                <a href="{{ route('eleve.payment') }}" class="sidebar-link @active('espace-eleve/paiement*')">
+                    <i class="bi bi-credit-card-fill"></i><span>Paiement</span>
+                    @if(!auth()->user()->hasPaid())<span class="notif-dot"></span>@endif
+                </a>
+                <a href="{{ route('eleve.mediatheque') }}" class="sidebar-link @active('espace-eleve/mediatheque*')">
+                    <i class="bi bi-play-circle-fill"></i><span>Médiathèque</span>
+                </a>
+                <a href="{{ route('eleve.quiz') }}" class="sidebar-link @active('espace-eleve/quiz*')">
+                    <i class="bi bi-patch-question-fill"></i><span>Quiz QCM</span>
+                </a>
+                <a href="{{ route('eleve.documents') }}" class="sidebar-link @active('espace-eleve/documents*')">
+                    <i class="bi bi-file-earmark-arrow-up-fill"></i><span>Mes documents</span>
+                </a>
 
-            <div class="sidebar-label">Compte</div>
-            <a href="{{ route('eleve.profile') }}" class="sidebar-link @active('profile*')">
-                <i class="bi bi-person-circle"></i><span>Mon profil</span>
-            </a>
+                <div class="sidebar-label">Compte</div>
+                <a href="{{ route('eleve.profile') }}" class="sidebar-link @active('profile*')">
+                    <i class="bi bi-person-circle"></i><span>Mon profil</span>
+                </a>
             @endif
         </nav>
 
@@ -1173,14 +1178,14 @@
         </header>
 
         <main class="main-content">
-            @foreach(['success'=>'success','warning'=>'warning','error'=>'danger','info'=>'info'] as $key => $type)
-            @if(session($key))
-            <div class="alert alert-{{ $type }} alert-dismissible fade show mb-3" role="alert">
-                <i class="bi bi-{{ $type==='success'?'check-circle':'exclamation-circle' }}-fill me-2"></i>
-                {{ session($key) }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
-            </div>
-            @endif
+            @foreach(['success' => 'success', 'warning' => 'warning', 'error' => 'danger', 'info' => 'info'] as $key => $type)
+                @if(session($key))
+                    <div class="alert alert-{{ $type }} alert-dismissible fade show mb-3" role="alert">
+                        <i class="bi bi-{{ $type === 'success' ? 'check-circle' : 'exclamation-circle' }}-fill me-2"></i>
+                        {{ session($key) }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
+                    </div>
+                @endif
             @endforeach
             @yield('content')
         </main>
@@ -1188,8 +1193,7 @@
 
     {{-- ══ WHATSAPP ══ --}}
     <a href="https://wa.me/2250545160597?text=Bonjour%2C%20je%20souhaite%20des%20informations%20sur%20la%20formation."
-        target="_blank" rel="noopener noreferrer"
-        class="whatsapp-float" aria-label="Support WhatsApp">
+        target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Support WhatsApp">
         <i class="bi bi-whatsapp"></i>
     </a>
 
@@ -1200,24 +1204,24 @@
             overlay = document.getElementById('sidebarOverlay'),
             toggle = document.getElementById('toggleSidebar');
         if (toggle) {
-            toggle.addEventListener('click', function() {
+            toggle.addEventListener('click', function () {
                 sidebar.classList.add('open');
                 overlay.classList.add('active');
                 document.body.style.overflow = 'hidden';
             });
-            overlay.addEventListener('click', function() {
+            overlay.addEventListener('click', function () {
                 sidebar.classList.remove('open');
                 overlay.classList.remove('active');
                 document.body.style.overflow = '';
             });
-            document.addEventListener('keydown', function(e) {
+            document.addEventListener('keydown', function (e) {
                 if (e.key === 'Escape') {
                     sidebar.classList.remove('open');
                     overlay.classList.remove('active');
                     document.body.style.overflow = '';
                 }
             });
-            window.addEventListener('resize', function() {
+            window.addEventListener('resize', function () {
                 if (window.innerWidth > 768) {
                     sidebar.classList.remove('open');
                     overlay.classList.remove('active');

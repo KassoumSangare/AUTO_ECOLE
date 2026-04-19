@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="theme-color" content="#C8102E">
-    <meta name="description" content="@yield('meta_description', 'Auto-École Le Chemin à Abidjan : formation complète au permis de conduire.')">
+    <meta name="description"
+        content="@yield('meta_description', 'Auto-École Le Chemin à Abidjan : formation complète au permis de conduire.')">
     <meta name="robots" content="index, follow">
     <title>@yield('title', 'Auto-École Le Chemin') — Permis de conduire à Abidjan</title>
 
@@ -43,6 +44,11 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
+    <meta name="theme-color" content="#C8102E">
+
+    {{-- Favicon --}}
+    <link rel="icon" type="image/jpeg" href="{{ asset('assets/images/logo.jpeg') }}">
+    <link rel="apple-touch-icon" href="{{ asset('assets/images/logo.jpeg') }}">
     <style>
         /* ══ PALETTE Le Chemin — Rouge · Vert · Blanc ══════════ */
         :root {
@@ -571,12 +577,15 @@
                 <a href="#features" class="nav-link-item"><i class="bi bi-grid"></i>Services</a>
                 <a href="#contact" class="nav-link-item"><i class="bi bi-geo-alt"></i>Contact</a>
                 @auth
-                <a href="{{ auth()->user()->isAdmin() ? route('admin.dashboard') : route('eleve.dashboard') }}" class="nav-link-item">
-                    <i class="bi bi-person-circle"></i>Mon espace
-                </a>
+                    <a href="{{ auth()->user()->isAdmin() ? route('admin.dashboard') : route('eleve.dashboard') }}"
+                        class="nav-link-item">
+                        <i class="bi bi-person-circle"></i>Mon espace
+                    </a>
                 @else
-                <a href="{{ route('login') }}" class="nav-link-item"><i class="bi bi-box-arrow-in-right"></i>Connexion</a>
-                <a href="{{ route('register') }}" class="nav-link-register ms-1"><i class="bi bi-person-plus-fill"></i>S'inscrire</a>
+                    <a href="{{ route('login') }}" class="nav-link-item"><i
+                            class="bi bi-box-arrow-in-right"></i>Connexion</a>
+                    <a href="{{ route('register') }}" class="nav-link-register ms-1"><i
+                            class="bi bi-person-plus-fill"></i>S'inscrire</a>
                 @endauth
             </div>
 
@@ -591,20 +600,24 @@
                 <a href="#features" class="mobile-menu-link"><i class="bi bi-grid-fill"></i>Services</a>
                 <a href="#contact" class="mobile-menu-link"><i class="bi bi-geo-alt-fill"></i>Contact</a>
                 @auth
-                <a href="{{ auth()->user()->isAdmin() ? route('admin.dashboard') : route('eleve.dashboard') }}" class="mobile-menu-link">
-                    <i class="bi bi-person-circle"></i>Mon espace
-                </a>
-                <form method="POST" action="{{ route('logout') }}" style="margin-top:.25rem;">
-                    @csrf
-                    <button type="submit" class="mobile-menu-link w-100 text-start" style="background:rgba(0,0,0,.15);border:none;cursor:pointer;">
-                        <i class="bi bi-box-arrow-left"></i>Déconnexion
-                    </button>
-                </form>
+                    <a href="{{ auth()->user()->isAdmin() ? route('admin.dashboard') : route('eleve.dashboard') }}"
+                        class="mobile-menu-link">
+                        <i class="bi bi-person-circle"></i>Mon espace
+                    </a>
+                    <form method="POST" action="{{ route('logout') }}" style="margin-top:.25rem;">
+                        @csrf
+                        <button type="submit" class="mobile-menu-link w-100 text-start"
+                            style="background:rgba(0,0,0,.15);border:none;cursor:pointer;">
+                            <i class="bi bi-box-arrow-left"></i>Déconnexion
+                        </button>
+                    </form>
                 @else
-                <a href="{{ route('login') }}" class="mobile-menu-link"><i class="bi bi-box-arrow-in-right"></i>Connexion</a>
-                <a href="{{ route('register') }}" style="background:#fff;color:var(--rouge);font-weight:800;border-radius:8px;padding:.65rem .75rem;display:flex;align-items:center;gap:.5rem;font-size:.9rem;text-decoration:none;margin-top:.3rem;">
-                    <i class="bi bi-person-plus-fill"></i>S'inscrire gratuitement
-                </a>
+                    <a href="{{ route('login') }}" class="mobile-menu-link"><i
+                            class="bi bi-box-arrow-in-right"></i>Connexion</a>
+                    <a href="{{ route('register') }}"
+                        style="background:#fff;color:var(--rouge);font-weight:800;border-radius:8px;padding:.65rem .75rem;display:flex;align-items:center;gap:.5rem;font-size:.9rem;text-decoration:none;margin-top:.3rem;">
+                        <i class="bi bi-person-plus-fill"></i>S'inscrire gratuitement
+                    </a>
                 @endauth
             </div>
         </div>
@@ -619,10 +632,10 @@
             <div class="row align-items-center g-3">
                 <div class="col-md-6">
                     <div class="footer-brand">
-                        
+
                         <a href="{{ route('home') }}" class="sidebar-brand">
                             <img src="{{ asset('assets/images/logo.jpeg') }}" class="nav-brand-logo" alt="Logo">
-                        
+
                         </a>
                     </div>
                     <div class="mt-1" style="font-size:.8rem;">
@@ -630,10 +643,13 @@
                     </div>
                 </div>
                 <div class="col-md-6 text-md-end d-flex flex-wrap gap-3 justify-content-md-end align-items-center">
-                    <a href="tel:+2250545160597" style="color:rgba(255,255,255,.6);text-decoration:none;font-size:.82rem;display:flex;align-items:center;gap:.35rem;">
+                    <a href="tel:+2250545160597"
+                        style="color:rgba(255,255,255,.6);text-decoration:none;font-size:.82rem;display:flex;align-items:center;gap:.35rem;">
                         <i class="bi bi-telephone-fill" style="color:var(--vert-p);"></i>+225 27 24 31 88 38
                     </a>
-                    <a href="https://wa.me/2250545160597?text=Bonjour%2C%20je%20souhaite%20des%20informations%20sur%20la%20formation." target="_blank" style="color:rgba(255,255,255,.6);text-decoration:none;font-size:.82rem;display:flex;align-items:center;gap:.35rem;">
+                    <a href="https://wa.me/2250545160597?text=Bonjour%2C%20je%20souhaite%20des%20informations%20sur%20la%20formation."
+                        target="_blank"
+                        style="color:rgba(255,255,255,.6);text-decoration:none;font-size:.82rem;display:flex;align-items:center;gap:.35rem;">
                         <i class="bi bi-whatsapp" style="color:#25D366;"></i>WhatsApp
                     </a>
                 </div>
@@ -656,23 +672,23 @@
         const burgerBtn = document.getElementById('burgerBtn'),
             mobileMenu = document.getElementById('mobileMenu'),
             burgerIcon = document.getElementById('burgerIcon');
-        burgerBtn.addEventListener('click', function() {
+        burgerBtn.addEventListener('click', function () {
             const o = mobileMenu.classList.toggle('open');
             burgerIcon.className = o ? 'bi bi-x-lg' : 'bi bi-list';
             burgerBtn.setAttribute('aria-expanded', o);
         });
-        document.addEventListener('click', function(e) {
+        document.addEventListener('click', function (e) {
             if (!burgerBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
                 mobileMenu.classList.remove('open');
                 burgerIcon.className = 'bi bi-list';
             }
         });
-        window.addEventListener('scroll', function() {
+        window.addEventListener('scroll', function () {
             document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
         }, {
             passive: true
         });
-        window.addEventListener('scroll', function() {
+        window.addEventListener('scroll', function () {
             const b = document.getElementById('backToTop'),
                 s = window.scrollY > 400;
             b.style.opacity = s ? '1' : '0';
@@ -680,14 +696,14 @@
         }, {
             passive: true
         });
-        document.getElementById('backToTop').addEventListener('click', function() {
+        document.getElementById('backToTop').addEventListener('click', function () {
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
             });
         });
-        const revObs = new IntersectionObserver(function(e) {
-            e.forEach(function(x) {
+        const revObs = new IntersectionObserver(function (e) {
+            e.forEach(function (x) {
                 if (x.isIntersecting) {
                     x.target.classList.add('visible');
                     revObs.unobserve(x.target);
@@ -697,16 +713,16 @@
             threshold: 0.12,
             rootMargin: '0px 0px -40px 0px'
         });
-        document.querySelectorAll('.reveal,.stagger').forEach(function(el) {
+        document.querySelectorAll('.reveal,.stagger').forEach(function (el) {
             revObs.observe(el);
         });
         const vc = document.getElementById('viewCount');
         if (vc) {
             const t = parseInt(vc.dataset.target, 10),
-                ease = function(x) {
+                ease = function (x) {
                     return 1 - Math.pow(1 - x, 3)
                 };
-            setTimeout(function() {
+            setTimeout(function () {
                 const s = performance.now();
                 (function tick(n) {
                     const p = Math.min((n - s) / 2000, 1);
@@ -715,14 +731,14 @@
                 })(performance.now());
             }, 500);
         }
-        const cObs = new IntersectionObserver(function(e) {
-            e.forEach(function(x) {
+        const cObs = new IntersectionObserver(function (e) {
+            e.forEach(function (x) {
                 if (!x.isIntersecting) return;
                 const el = x.target,
                     t = parseInt(el.dataset.counter, 10);
                 if (isNaN(t)) return;
                 const s = performance.now(),
-                    ease = function(v) {
+                    ease = function (v) {
                         return 1 - Math.pow(1 - v, 3)
                     };
                 (function tick(n) {
@@ -735,7 +751,7 @@
         }, {
             threshold: .4
         });
-        document.querySelectorAll('[data-counter]').forEach(function(el) {
+        document.querySelectorAll('[data-counter]').forEach(function (el) {
             cObs.observe(el);
         });
     </script>
