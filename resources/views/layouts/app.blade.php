@@ -6,54 +6,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="theme-color" content="#AF2636">
+    {{-- Pas d'indexation pour les pages connectées ══ --}}
+    <meta name="robots" content="noindex, nofollow">
     <title>@yield('title', 'Espace Élève') — Auto-École Le Chemin</title>
 
+    {{-- ══ Favicon ══ --}}
+    <link rel="icon" type="image/jpeg" href="{{ asset('assets/images/logo.jpeg') }}">
+    <link rel="apple-touch-icon" href="{{ asset('assets/images/logo.jpeg') }}">
+
+    {{-- ══ 1. Preconnect ══ --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    {{-- ══ 2. Google Fonts — Poppins + Syne ══ --}}
     <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Open+Sans:wght@400;500;600&display=swap"
-        rel="stylesheet" />
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Syne:wght@700;800&display=swap"
+        rel="stylesheet">
 
-    {{-- Font override AVANT Bootstrap --}}
+    {{-- ══ 3. Bootstrap CSS ══ --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+
+    {{-- ══ 4. Bootstrap Icons — une seule fois (doublon supprimé) ══ --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+    {{-- ══ 5. CSS custom ══ --}}
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+
     <style>
-        /* ═══════════════════════════════════════════════════════════
-   AUTO-ÉCOLE LE CHEMIN — Design System Global
-   Fichier : public/css/app.css
-═══════════════════════════════════════════════════════════ */
-
-        /* 1. VARIABLES */
         :root {
-            /* ══ PALETTE Le Chemin — Adoucie & Fluide ══════════ */
             --rouge: #AF2636;
-            /* Rouge Terrazzo            */
             --rouge-c: #8A1E2B;
-            /* Rouge foncé               */
             --rouge-p: #FFF1F2;
-            /* Rouge pâle (backgrounds)  */
             --vert: #2D6A4F;
-            /* Vert Sauge                */
             --vert-c: #1B4332;
-            /* Vert foncé                */
             --vert-p: #F0F7F4;
-            /* Vert pâle (backgrounds)   */
             --or: #C5A059;
-            /* Or Sable                  */
             --or-c: #D9B36A;
-            /* Or clair                  */
             --or-p: #FEFCE8;
-            /* Or pâle (backgrounds)     */
             --blanc: #FFFFFF;
             --fond: #FBFBF9;
-            /* Blanc coquille d'œuf      */
             --texte: #1F2937;
-            /* Gris anthracite           */
             --texte-2: #6B7280;
-            /* Gris secondaire           */
             --border: #E5E7EB;
             --bg: #F5F5F3;
-
-            /* Aliases rétrocompatibles (anciens noms → nouvelles valeurs) */
             --bleu: #AF2636;
-            /* alias → rouge (sidebar, headings) */
             --bleu-c: #8A1E2B;
             --bleu-pale: #FFF1F2;
             --or-clair: #D9B36A;
@@ -61,20 +57,21 @@
             --gris-100: #F5F5F3;
             --gris-200: #E5E7EB;
             --gris-500: #6B7280;
-
             --r-sm: 8px;
             --r-md: 14px;
             --r-lg: 20px;
+            --r: 12px;
             --shadow-sm: 0 2px 8px rgba(175, 38, 54, .06);
             --shadow-md: 0 8px 24px rgba(175, 38, 54, .10);
             --shadow-lg: 0 16px 48px rgba(175, 38, 54, .14);
             --shadow-or: 0 8px 28px rgba(197, 160, 89, .35);
             --trans: .3s cubic-bezier(.4, 0, .2, 1);
-            --font-d: "Poppins", sans-serif;
-            --font-b: "Poppins", sans-serif;
+            --font-d: 'Syne', Georgia, serif;
+            --font-b: 'Poppins', 'Helvetica Neue', Arial, sans-serif;
+            --sidebar-w: 258px;
+            --topbar-h: 58px;
         }
 
-        /* 2. RESET & BASE */
         *,
         *::before,
         *::after {
@@ -88,8 +85,9 @@
 
         body {
             font-family: var(--font-b) !important;
-            background: var(--fond);
+            background: var(--bg);
             color: var(--texte);
+            min-height: 100vh;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
         }
@@ -100,8 +98,15 @@
         h4,
         h5,
         h6,
-        .font-d {
-            font-family: var(--font-d);
+        .font-d,
+        .page-title,
+        .kpi-val,
+        .card-d-title,
+        .section-title,
+        .brand-name,
+        .pcard-title,
+        .auth-title {
+            font-family: var(--font-d) !important;
         }
 
         img {
@@ -109,7 +114,7 @@
             height: auto;
         }
 
-        /* 3. KEYFRAMES */
+        /* ══ KEYFRAMES ══ */
         @keyframes fadeIn {
             from {
                 opacity: 0
@@ -206,7 +211,6 @@
             }
         }
 
-        /* WhatsApp */
         @keyframes wa-pulse {
             0% {
                 box-shadow: 0 0 0 0 rgba(37, 211, 102, .6), 0 4px 20px rgba(37, 211, 102, .45);
@@ -241,7 +245,7 @@
             }
         }
 
-        /* 4. ANIMATION UTILITIES */
+        /* ══ ANIMATIONS ══ */
         .anim-fade-in {
             animation: fadeIn .5s ease both;
         }
@@ -294,7 +298,7 @@
             animation-delay: .7s
         }
 
-        /* 5. SCROLL REVEAL */
+        /* ══ SCROLL REVEAL ══ */
         .reveal {
             opacity: 0;
             transform: translateY(28px);
@@ -318,7 +322,6 @@
             transform: none;
         }
 
-        /* Stagger children */
         .stagger>* {
             opacity: 0;
             transform: translateY(18px);
@@ -361,81 +364,15 @@
             transform: none;
         }
 
-        /* 6. WHATSAPP BUTTON */
-        .whatsapp-float {
-            position: fixed;
-            bottom: 28px;
-            right: 28px;
-            width: 60px;
-            height: 60px;
-            background: #25D366;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            text-decoration: none;
-            animation: wa-pulse 2.2s ease-out infinite, wa-bounce 5s ease-in-out infinite 2s;
-            transition: transform var(--trans), box-shadow var(--trans);
-            will-change: transform;
+        /* ══ SKELETON ══ */
+        .skeleton {
+            background: linear-gradient(90deg, #F0F4FA 25%, #E5EAFF 50%, #F0F4FA 75%);
+            background-size: 600px 100%;
+            animation: shimmer 1.4s infinite;
+            border-radius: var(--r-sm);
         }
 
-        .whatsapp-float:hover {
-            transform: scale(1.15) translateY(-4px) !important;
-            box-shadow: 0 10px 36px rgba(37, 211, 102, .7) !important;
-            animation-play-state: paused;
-        }
-
-        .whatsapp-float i {
-            font-size: 1.85rem;
-            color: #fff;
-            transition: transform var(--trans);
-        }
-
-        .whatsapp-float:hover i {
-            transform: rotate(-12deg) scale(1.1);
-        }
-
-        /* Tooltip */
-        .whatsapp-float::before {
-            content: 'Nous contacter';
-            position: absolute;
-            right: 70px;
-            background: var(--rouge);
-            color: #fff;
-            font-family: var(--font-b);
-            font-size: .76rem;
-            font-weight: 600;
-            padding: .35rem .8rem;
-            border-radius: 8px;
-            white-space: nowrap;
-            opacity: 0;
-            transform: translateX(6px);
-            transition: opacity .25s ease, transform .25s ease;
-            pointer-events: none;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .whatsapp-float::after {
-            content: '';
-            position: absolute;
-            right: 62px;
-            border: 5px solid transparent;
-            border-left-color: var(--rouge);
-            opacity: 0;
-            transition: opacity .25s ease;
-        }
-
-        .whatsapp-float:hover::before {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .whatsapp-float:hover::after {
-            opacity: 1;
-        }
-
-        /* 7. CARDS */
+        /* ══ CARDS ══ */
         .card-lc {
             background: #fff;
             border-radius: var(--r-md);
@@ -449,7 +386,7 @@
             border-color: rgba(212, 168, 67, .3);
         }
 
-        /* 8. BUTTONS */
+        /* ══ BUTTONS ══ */
         .btn-primary-lc {
             background: linear-gradient(135deg, var(--or), var(--or-clair));
             color: var(--rouge);
@@ -517,18 +454,7 @@
             background: rgba(212, 168, 67, .08);
         }
 
-        /* 9. NAVBAR SCROLL EFFECT */
-        .navbar-lc {
-            transition: padding var(--trans), box-shadow var(--trans);
-        }
-
-        .navbar-lc.scrolled {
-            padding-top: .55rem !important;
-            padding-bottom: .55rem !important;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, .3) !important;
-        }
-
-        /* 10. VIEWS COUNTER */
+        /* ══ VIEWS COUNTER ══ */
         .views-counter {
             display: inline-flex;
             align-items: center;
@@ -554,252 +480,29 @@
             text-align: center;
         }
 
-        /* 11. HERO ROAD LINES */
+        /* ══ HERO ROAD ══ */
         .hero-road::before {
             content: '';
             position: absolute;
             inset: 0;
             pointer-events: none;
-            background: repeating-linear-gradient(90deg,
-                    transparent 48.5%,
-                    rgba(212, 168, 67, .09) 49%, rgba(212, 168, 67, .09) 51%,
-                    transparent 51.5%);
+            background: repeating-linear-gradient(90deg, transparent 48.5%, rgba(212, 168, 67, .09) 49%, rgba(212, 168, 67, .09) 51%, transparent 51.5%);
             animation: road-scroll 10s linear infinite;
         }
 
-        /* 12. SKELETON */
-        .skeleton {
-            background: linear-gradient(90deg, #F0F4FA 25%, #E5EAFF 50%, #F0F4FA 75%);
-            background-size: 600px 100%;
-            animation: shimmer 1.4s infinite;
-            border-radius: var(--r-sm);
-        }
-
-        /* 13. SCROLLBAR */
-        ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #F0F4FA;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #CBD5E1;
-            border-radius: 3px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--rouge-c);
-        }
-
-        /* 14. SIDEBAR OVERLAY MOBILE */
-        .sidebar-overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, .5);
-            z-index: 850;
-            opacity: 0;
-            transition: opacity .3s ease;
-        }
-
-        .sidebar-overlay.active {
-            display: block;
-            opacity: 1;
-        }
-
-        /* 15. RESPONSIVE */
-        @media (max-width: 575.98px) {
-            .whatsapp-float {
-                width: 52px;
-                height: 52px;
-                bottom: 16px;
-                right: 16px;
-            }
-
-            .whatsapp-float i {
-                font-size: 1.55rem;
-            }
-
-            .whatsapp-float::before,
-            .whatsapp-float::after {
-                display: none;
-            }
-
-            .btn-primary-lc,
-            .btn-dark-lc {
-                padding: .72rem 1.4rem;
-                font-size: .88rem;
-            }
-
-            .sidebar {
-                width: 100% !important;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .sidebar {
-                transform: translateX(-100%);
-            }
-
-            .sidebar.open {
-                transform: translateX(0);
-            }
-
-            .main-wrapper {
-                margin-left: 0 !important;
-            }
-        }
-
-        @media (hover: none) {
-
-            .card-lc:hover,
-            .btn-primary-lc:hover,
-            .btn-dark-lc:hover {
-                transform: none;
-                box-shadow: none;
-            }
-
-            .whatsapp-float {
-                animation: wa-pulse 2.2s ease-out infinite !important;
-            }
-        }
-
-        /* 16. REDUCED MOTION */
-        @media (prefers-reduced-motion: reduce) {
-
-            *,
-            *::before,
-            *::after {
-                animation-duration: .01ms !important;
-                transition-duration: .01ms !important;
-            }
-
-            .whatsapp-float {
-                animation: none !important;
-                box-shadow: 0 4px 20px rgba(37, 211, 102, .45);
-            }
-
-            .reveal {
-                opacity: 1 !important;
-                transform: none !important;
-            }
-        }
-
-        /* 17. FOCUS ACCESSIBILITY */
-        :focus-visible {
-            outline: 2px solid var(--or);
-            outline-offset: 3px;
-            border-radius: 4px;
-        }
-
-        /* 18. PRINT */
-        @media print {
-
-            .whatsapp-float,
-            .sidebar,
-            .topbar,
-            .navbar-lc {
-                display: none !important;
-            }
-
-            .main-wrapper {
-                margin-left: 0 !important;
-            }
-        }
-
-        html,
-        body,
-        input,
-        button,
-        select,
-        textarea {
-            font-family: 'DM Sans', 'Helvetica Neue', Arial, sans-serif !important;
-        }
-
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6,
-        .page-title,
-        .kpi-val,
-        .card-d-title,
-        .section-title,
-        .brand-name,
-        .pcard-title,
-        .auth-title {
-            font-family: 'Syne', Georgia, serif !important;
-        }
-    </style>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-
-
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    <!-- À mettre dans le <head> -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net">
-    <meta name="theme-color" content="#C8102E">
-
-    {{-- Favicon --}}
-    <link rel="icon" type="image/jpeg" href="{{ asset('assets/images/logo.jpeg') }}">
-    <link rel="apple-touch-icon" href="{{ asset('assets/images/logo.jpeg') }}">
-
-    <style>
-        /* ══ PALETTE Le Chemin — Adoucie & Fluide ══════════ */
-        :root {
-            --rouge: #AF2636;
-            --rouge-c: #8A1E2B;
-            --rouge-p: #FFF1F2;
-            --vert: #2D6A4F;
-            --vert-c: #1B4332;
-            --vert-p: #F0F7F4;
-            --or: #C5A059;
-            --or-c: #D9B36A;
-            --blanc: #FFFFFF;
-            --fond: #FBFBF9;
-            --texte: #1F2937;
-            --texte-2: #6B7280;
-            --border: #E5E7EB;
-            --bg: #F5F5F3;
-            --font-d: 'Syne', Georgia, serif;
-            --font-b: 'DM Sans', 'Helvetica Neue', Arial, sans-serif;
-            --sidebar-w: 258px;
-            --topbar-h: 58px;
-            --trans: .3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        body {
-            background: var(--bg);
-            min-height: 100vh;
-            font-family: var(--font-b) !important;
-        }
-
+        /* ══ LOGO ══ */
         .nav-brand-logo {
             width: 60px;
             height: 55px;
             border-radius: 10px;
             background: #fff;
-
-            /* Empêche la déformation de l'image */
             object-fit: cover;
-
-            /* Optionnel : si l'image a un fond transparent ou doit être centrée */
             object-position: center;
-
-            /* Garde tes propriétés de structure */
             flex-shrink: 0;
-
-            /* Pour l'esthétique */
-            border: 1px solid rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, .05);
         }
 
-
-        /* ══ SIDEBAR ═══════════════════════════════════════ */
+        /* ══ SIDEBAR ══ */
         .sidebar {
             width: var(--sidebar-w);
             background: var(--rouge-c);
@@ -811,6 +514,7 @@
             display: flex;
             flex-direction: column;
             border-right: 3px solid var(--vert);
+            transition: transform .3s cubic-bezier(.4, 0, .2, 1);
         }
 
         .sidebar-brand {
@@ -939,7 +643,27 @@
             font-family: var(--font-d) !important;
         }
 
-        /* ══ MAIN ════════════════════════════════════════ */
+        .logout-btn {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            width: 100%;
+            background: rgba(255, 255, 255, .08);
+            border: none;
+            border-radius: 8px;
+            color: rgba(255, 255, 255, .75);
+            padding: .5rem .75rem;
+            font-size: .85rem;
+            cursor: pointer;
+            transition: background var(--trans), color var(--trans);
+        }
+
+        .logout-btn:hover {
+            background: rgba(255, 255, 255, .15);
+            color: #fff;
+        }
+
+        /* ══ MAIN ══ */
         .main-wrapper {
             margin-left: var(--sidebar-w);
             min-height: 100vh;
@@ -976,7 +700,7 @@
             flex: 1;
         }
 
-        /* Alertes */
+        /* ══ ALERTES ══ */
         .alert {
             border: none;
             border-radius: 12px;
@@ -1007,7 +731,7 @@
             border-left: 3px solid #3B82F6;
         }
 
-        /* WhatsApp */
+        /* ══ WHATSAPP ══ */
         .whatsapp-float {
             position: fixed;
             bottom: 22px;
@@ -1022,19 +746,66 @@
             z-index: 9999;
             text-decoration: none;
             box-shadow: 0 4px 16px rgba(37, 211, 102, .4);
-            transition: transform .25s ease;
+            animation: wa-pulse 2.2s ease-out infinite, wa-bounce 5s ease-in-out infinite 2s;
+            transition: transform var(--trans), box-shadow var(--trans);
+            will-change: transform;
         }
 
         .whatsapp-float:hover {
-            transform: scale(1.1);
+            transform: scale(1.15) translateY(-4px) !important;
+            box-shadow: 0 10px 36px rgba(37, 211, 102, .7) !important;
+            animation-play-state: paused;
         }
 
         .whatsapp-float i {
             font-size: 1.55rem;
             color: #fff;
+            transition: transform var(--trans);
         }
 
-        /* Sidebar overlay mobile */
+        .whatsapp-float:hover i {
+            transform: rotate(-12deg) scale(1.1);
+        }
+
+        .whatsapp-float::before {
+            content: 'Nous contacter';
+            position: absolute;
+            right: 70px;
+            background: var(--rouge);
+            color: #fff;
+            font-family: var(--font-b);
+            font-size: .76rem;
+            font-weight: 600;
+            padding: .35rem .8rem;
+            border-radius: 8px;
+            white-space: nowrap;
+            opacity: 0;
+            transform: translateX(6px);
+            transition: opacity .25s ease, transform .25s ease;
+            pointer-events: none;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .whatsapp-float::after {
+            content: '';
+            position: absolute;
+            right: 62px;
+            border: 5px solid transparent;
+            border-left-color: var(--rouge);
+            opacity: 0;
+            transition: opacity .25s ease;
+        }
+
+        .whatsapp-float:hover::before {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .whatsapp-float:hover::after {
+            opacity: 1;
+        }
+
+        /* ══ SIDEBAR OVERLAY ══ */
         .sidebar-overlay {
             display: none;
             position: fixed;
@@ -1042,12 +813,66 @@
             background: rgba(0, 0, 0, .5);
             z-index: 850;
             opacity: 0;
-            transition: opacity .3s;
+            transition: opacity .3s ease;
         }
 
         .sidebar-overlay.active {
             display: block;
             opacity: 1;
+        }
+
+        /* ══ SCROLLBAR ══ */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #F0F4FA;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #CBD5E1;
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--rouge-c);
+        }
+
+        :focus-visible {
+            outline: 2px solid var(--or);
+            outline-offset: 3px;
+            border-radius: 4px;
+        }
+
+        /* ══ RESPONSIVE ══ */
+        @media (max-width:575.98px) {
+            .whatsapp-float {
+                width: 44px;
+                height: 44px;
+                bottom: 14px;
+                right: 14px;
+            }
+
+            .whatsapp-float i {
+                font-size: 1.35rem;
+            }
+
+            .whatsapp-float::before,
+            .whatsapp-float::after {
+                display: none;
+            }
+
+            .btn-primary-lc,
+            .btn-dark-lc {
+                padding: .72rem 1.4rem;
+                font-size: .88rem;
+            }
+
+            .sidebar {
+                width: 100% !important;
+            }
         }
 
         @media (max-width:768px) {
@@ -1074,6 +899,53 @@
                 border-top-width: 2px;
             }
         }
+
+        @media (hover:none) {
+
+            .card-lc:hover,
+            .btn-primary-lc:hover,
+            .btn-dark-lc:hover {
+                transform: none;
+                box-shadow: none;
+            }
+
+            .whatsapp-float {
+                animation: wa-pulse 2.2s ease-out infinite !important;
+            }
+        }
+
+        @media (prefers-reduced-motion:reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: .01ms !important;
+                transition-duration: .01ms !important;
+            }
+
+            .whatsapp-float {
+                animation: none !important;
+                box-shadow: 0 4px 20px rgba(37, 211, 102, .45);
+            }
+
+            .reveal {
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        }
+
+        @media print {
+
+            .whatsapp-float,
+            .sidebar,
+            .topbar {
+                display: none !important;
+            }
+
+            .main-wrapper {
+                margin-left: 0 !important;
+            }
+        }
     </style>
 
     @yield('head')
@@ -1084,7 +956,11 @@
     {{-- ══ SIDEBAR ══ --}}
     <aside class="sidebar" id="sidebar" aria-label="Navigation latérale">
         <a href="{{ route('home') }}" class="sidebar-brand">
-            <img src="{{ asset('assets/images/logo.jpeg') }}" class="nav-brand-logo" alt="Logo">
+            <picture>
+                <source srcset="{{ asset('assets/images/logo.jpeg') }}" type="image/webp">
+                <img src="{{ asset('assets/images/logo.jpeg') }}" class="nav-brand-logo" alt="Auto-École Le Chemin"
+                    width="60" height="55" loading="lazy">
+            </picture>
             <div class="brand-name">Le <span>Chemin</span></div>
         </a>
 
@@ -1108,12 +984,10 @@
                 <a href="{{ route('admin.reporting.index') }}" class="sidebar-link @active('admin/reporting*')">
                     <i class="bi bi-bar-chart-line-fill"></i><span>Reporting</span>
                 </a>
-
                 <div class="sidebar-label">Paramètres</div>
                 <a href="{{ route('profile.edit') }}" class="sidebar-link @active('profile*')">
                     <i class="bi bi-person-circle"></i><span>Mon Profil</span>
                 </a>
-
             @else
                 {{-- MENU ÉLÈVE --}}
                 <div class="sidebar-label">Mon parcours</div>
@@ -1133,7 +1007,6 @@
                 <a href="{{ route('eleve.documents') }}" class="sidebar-link @active('espace-eleve/documents*')">
                     <i class="bi bi-file-earmark-arrow-up-fill"></i><span>Mes documents</span>
                 </a>
-
                 <div class="sidebar-label">Compte</div>
                 <a href="{{ route('eleve.profile') }}" class="sidebar-link @active('profile*')">
                     <i class="bi bi-person-circle"></i><span>Mon profil</span>
@@ -1145,11 +1018,14 @@
             <div class="user-chip mb-2">
                 <div class="user-avatar">{{ strtoupper(substr(auth()->user()->prenom, 0, 1)) }}</div>
                 <div class="user-info">
-                    <div class="user-name">{{ auth()->user()->nom_complet }}</div>
-                    <div class="user-phone">{{ auth()->user()->telephone }}</div>
+                    <div style="font-size:.83rem;font-weight:700;line-height:1.2;color:rgba(255,255,255,.9);">
+                        {{ auth()->user()->nom_complet }}
+                    </div>
+                    <div style="font-size:.74rem;color:rgba(255,255,255,.5);">
+                        {{ auth()->user()->telephone }}
+                    </div>
                 </div>
             </div>
-
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <button type="submit" class="logout-btn">
@@ -1158,6 +1034,7 @@
             </form>
         </div>
     </aside>
+
     <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
     {{-- ══ MAIN ══ --}}
@@ -1198,40 +1075,23 @@
     </a>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}" defer></script>
     <script>
         const sidebar = document.getElementById('sidebar'),
             overlay = document.getElementById('sidebarOverlay'),
             toggle = document.getElementById('toggleSidebar');
+
         if (toggle) {
-            toggle.addEventListener('click', function () {
-                sidebar.classList.add('open');
-                overlay.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            });
-            overlay.addEventListener('click', function () {
-                sidebar.classList.remove('open');
-                overlay.classList.remove('active');
-                document.body.style.overflow = '';
-            });
-            document.addEventListener('keydown', function (e) {
-                if (e.key === 'Escape') {
-                    sidebar.classList.remove('open');
-                    overlay.classList.remove('active');
-                    document.body.style.overflow = '';
-                }
-            });
-            window.addEventListener('resize', function () {
-                if (window.innerWidth > 768) {
-                    sidebar.classList.remove('open');
-                    overlay.classList.remove('active');
-                    document.body.style.overflow = '';
-                }
-            }, {
-                passive: true
-            });
+            const openSidebar = () => { sidebar.classList.add('open'); overlay.classList.add('active'); document.body.style.overflow = 'hidden'; };
+            const closeSidebar = () => { sidebar.classList.remove('open'); overlay.classList.remove('active'); document.body.style.overflow = ''; };
+
+            toggle.addEventListener('click', openSidebar);
+            overlay.addEventListener('click', closeSidebar);
+            document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeSidebar(); });
+            window.addEventListener('resize', function () { if (window.innerWidth > 768) closeSidebar(); }, { passive: true });
         }
     </script>
+
     @yield('scripts')
 </body>
 
