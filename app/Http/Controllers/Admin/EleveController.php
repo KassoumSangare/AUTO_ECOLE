@@ -14,22 +14,20 @@ class EleveController extends Controller
     public function index(Request $request): View
     {
         $query = User::eleves()
-            ->with(['payments' => fn($q) => $q->where('status','completed'), 'quizScores', 'documents'])
+            ->with(['payments' => fn($q) => $q->where('status', 'completed'), 'quizScores', 'documents'])
             ->withCount(['quizScores', 'documents']);
 
-        // Filtre date
         if ($request->filled('date_debut')) {
             $query->whereDate('created_at', '>=', $request->date_debut);
         }
         if ($request->filled('date_fin')) {
             $query->whereDate('created_at', '<=', $request->date_fin);
         }
-        // Filtre statut paiement
         if ($request->filled('statut')) {
             if ($request->statut === 'paye') {
-                $query->whereHas('payments', fn($q) => $q->where('status','completed'));
+                $query->whereHas('payments', fn($q) => $q->where('status', 'completed'));
             } elseif ($request->statut === 'non_paye') {
-                $query->whereDoesntHave('payments', fn($q) => $q->where('status','completed'));
+                $query->whereDoesntHave('payments', fn($q) => $q->where('status', 'completed'));
             }
         }
 
@@ -48,5 +46,21 @@ class EleveController extends Controller
     {
         $filename = 'eleves-auto-ecole-' . now()->format('Y-m-d') . '.xlsx';
         return Excel::download(new ElevesExport, $filename);
+    }
+
+    /**
+     * Active ou désactive l'accès manuel pour un élève.
+     */
+    public function toggleManualApproval(User $user)
+    {
+        abort_if($user->isAdmin(), 403, 'Action non autorisée sur un compte administrateur.');
+
+        $user->update([
+            'is_manually_approved' => !$user->is_manually_approved
+        ]);
+
+        $statut = $user->is_manually_approved ? 'activé' : 'désactivé';
+
+        return back()->with('success', "Accès manuel {$statut} pour {$user->prenom} {$user->nom}.");
     }
 }

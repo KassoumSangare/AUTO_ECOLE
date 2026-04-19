@@ -12,22 +12,17 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable, SoftDeletes;
 
-    /**
-     * Champs en masse assignable.
-     */
     protected $fillable = [
         'nom',
         'prenom',
         'telephone',
         'email',
         'password',
+        'is_manually_approved',
         'role',
         'is_active',
     ];
 
-    /**
-     * Champs cachés pour la sérialisation (JSON/API).
-     */
     protected $hidden = [
         'password',
         'remember_token',
@@ -37,8 +32,9 @@ class User extends Authenticatable
     {
         return [
             'email_verified_at' => 'datetime',
-            'password'          => 'hashed', // Auto-bcrypt Laravel 11
-            'is_active'         => 'boolean',
+            'password' => 'hashed',
+            'is_active' => 'boolean',
+            'is_manually_approved' => 'boolean',
         ];
     }
 
@@ -46,9 +42,6 @@ class User extends Authenticatable
     // ACCESSEURS
     // ───────────────────────────────────────────
 
-    /**
-     * Nom complet : "Koné Mamadou"
-     */
     public function getNomCompletAttribute(): string
     {
         return "{$this->nom} {$this->prenom}";
@@ -74,7 +67,7 @@ class User extends Authenticatable
     }
 
     // ───────────────────────────────────────────
-    // HELPERS ROLE
+    // HELPERS
     // ───────────────────────────────────────────
 
     public function isAdmin(): bool
@@ -88,15 +81,26 @@ class User extends Authenticatable
     }
 
     /**
-     * Vérifie si l'élève a effectué un paiement complété.
+     * Vérifie si l'utilisateur a un paiement Wave confirmé.
      */
     public function hasPaid(): bool
     {
-        return $this->payments()->where('status', 'completed')->exists();
+        return $this->payments()
+            ->where('status', 'completed')
+            ->exists();
+    }
+
+    /**
+     * Vérifie l'accès premium :
+     * paiement Wave validé OU approbation manuelle par l'admin.
+     */
+    public function hasPremiumAccess(): bool
+    {
+        return $this->hasPaid() || $this->is_manually_approved;
     }
 
     // ───────────────────────────────────────────
-    // RELATIONS ELOQUENT
+    // RELATIONS
     // ───────────────────────────────────────────
 
     public function documents(): HasMany

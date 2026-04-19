@@ -82,7 +82,7 @@
                     @if(! $hasPaid)
                         @if(session('error') || request()->query('error'))
                         <div class="alert alert-danger mb-3" style="border-radius:10px; font-size:.88rem;">
-                            <i class="bi bi-exclamation-triangle-fill me-2"></i>Le paiement a échoué. Veuillez réessayer.
+                            <i class="bi bi-exclamation-triangle-fill me-2"></i>Le paiement a échoué. Veuillez réessayer ou contacter l'auto-école via WhatsApp.
                         </div>
                         @endif
                         <form method="POST" action="{{ route('eleve.payment.initiate') }}">
