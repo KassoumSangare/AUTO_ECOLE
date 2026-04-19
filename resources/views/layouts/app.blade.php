@@ -1130,7 +1130,7 @@
             </a>
 
             <div class="sidebar-label">Compte</div>
-            <a href="{{ route('profile.edit') }}" class="sidebar-link @active('profile*')">
+            <a href="{{ route('eleve.profile') }}" class="sidebar-link @active('profile*')">
                 <i class="bi bi-person-circle"></i><span>Mon profil</span>
             </a>
             @endif
