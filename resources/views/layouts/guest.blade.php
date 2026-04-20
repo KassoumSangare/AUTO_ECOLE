@@ -56,7 +56,7 @@
             --texte-2: #6B7280;
             --or:      #D4A843;
             --or-c:    #F0C060;
-            --font-d:  'Syne', Georgia, serif;
+            --font-d:  'Poppins', Georgia, serif;
             --font-b:  'Poppins', 'Helvetica Neue', Arial, sans-serif;
             --trans:   .28s cubic-bezier(.4, 0, .2, 1);
         }

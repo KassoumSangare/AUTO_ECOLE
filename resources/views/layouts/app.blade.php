@@ -66,7 +66,7 @@
             --shadow-lg: 0 16px 48px rgba(175, 38, 54, .14);
             --shadow-or: 0 8px 28px rgba(197, 160, 89, .35);
             --trans: .3s cubic-bezier(.4, 0, .2, 1);
-            --font-d: 'Syne', Georgia, serif;
+            --font-d: 'Poppins', Georgia, serif;
             --font-b: 'Poppins', 'Helvetica Neue', Arial, sans-serif;
             --sidebar-w: 258px;
             --topbar-h: 58px;
