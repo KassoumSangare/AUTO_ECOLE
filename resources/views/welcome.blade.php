@@ -473,8 +473,8 @@
         }
 
         .director-avatar {
-            width: 68px;
-            height: 68px;
+            width: 75px;
+            height: 75px;
             border-radius: 50%;
             background: rgba(255, 255, 255, .18);
             border: 3px solid rgba(255, 255, 255, .35);
@@ -1716,7 +1716,8 @@
 
                 <div class="col-lg-5 reveal" style="transition-delay:.15s">
                     <div class="director-card">
-                        <div class="director-avatar">MK</div>
+                       
+                        <img class="director-avatar" src="{{  asset('assets/images/director.jpeg') }}" alt="Director">
                         <div class="director-name">M. Marcelin Kohon</div>
                         <div class="director-title">Directeur — Auto-École Le Chemin</div>
                         <p class="director-quote">
