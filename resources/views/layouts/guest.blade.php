@@ -30,7 +30,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     {{-- ══ 2. Google Fonts — Poppins + Syne (Syne était déclaré en CSS mais jamais chargé) ══ --}}
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+   <link rel="preconnect" href="https://googleapis.com">
+<link rel="preconnect" href="https://gstatic.com" crossorigin>
+<link href="https://googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 
     {{-- ══ 3. Bootstrap CSS ══ --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
@@ -56,8 +58,8 @@
             --texte-2: #6B7280;
             --or:      #D4A843;
             --or-c:    #F0C060;
-            --font-d:  'Poppins', Georgia, serif;
-            --font-b:  'Poppins', 'Helvetica Neue', Arial, sans-serif;
+            --font-d:   'Montserrat', sans-serif;
+            --font-b: 'Open Sans', sans-serif;
             --trans:   .28s cubic-bezier(.4, 0, .2, 1);
         }
 

@@ -19,9 +19,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     {{-- ══ 2. Google Fonts — Poppins + Syne ══ --}}
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Syne:wght@700;800&display=swap"
-        rel="stylesheet">
+   <link rel="preconnect" href="https://googleapis.com">
+<link rel="preconnect" href="https://gstatic.com" crossorigin>
+<link href="https://googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 
     {{-- ══ 3. Bootstrap CSS ══ --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
@@ -66,8 +66,8 @@
             --shadow-lg: 0 16px 48px rgba(175, 38, 54, .14);
             --shadow-or: 0 8px 28px rgba(197, 160, 89, .35);
             --trans: .3s cubic-bezier(.4, 0, .2, 1);
-            --font-d: 'Poppins', Georgia, serif;
-            --font-b: 'Poppins', 'Helvetica Neue', Arial, sans-serif;
+              --font-d:   'Montserrat', sans-serif;
+            --font-b: 'Open Sans', sans-serif;
             --sidebar-w: 258px;
             --topbar-h: 58px;
         }
