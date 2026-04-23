@@ -6,33 +6,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="theme-color" content="#C8102E">
-    <meta name="description" content="@yield('meta_description', 'Auto-École Le Chemin à Abidjan : formation complète au permis de conduire en Côte d\'Ivoire. Moniteurs certifiés, paiement Wave & Orange Money.')">
+    <meta name="description"
+        content="@yield('meta_description', 'Auto-École Le Chemin à Abidjan : formation complète au permis de conduire en Côte d\'Ivoire. Moniteurs certifiés, paiement Wave & Orange Money.')">
     <meta name="robots" content="index, follow">
     <meta name="author" content="Auto-École Le Chemin">
 
     {{-- ══ Open Graph (partage WhatsApp / Facebook) ══ --}}
-    <meta property="og:type"        content="website">
-    <meta property="og:locale"      content="fr_CI">
-    <meta property="og:site_name"   content="Auto-École Le Chemin">
-    <meta property="og:title"       content="@yield('og_title', 'Auto-École Le Chemin — Permis de Conduire à Abidjan')">
-    <meta property="og:description" content="@yield('og_description', 'Formation permis de conduire à Abidjan. Paiement Wave, Orange Money, MTN Money.')">
-    <meta property="og:image"       content="{{ asset('assets/images/logo.jpeg') }}">
-    <meta property="og:url"         content="{{ url()->current() }}">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="fr_CI">
+    <meta property="og:site_name" content="Auto-École Le Chemin">
+    <meta property="og:title" content="@yield('og_title', 'Auto-École Le Chemin — Permis de Conduire à Abidjan')">
+    <meta property="og:description"
+        content="@yield('og_description', 'Formation permis de conduire à Abidjan. Paiement Wave, Orange Money, MTN Money.')">
+    <meta property="og:image" content="{{ asset('assets/images/logo.jpeg') }}">
+    <meta property="og:url" content="{{ url()->current() }}">
 
     <title>@yield('title', 'Auto-École Le Chemin') — Permis de conduire à Abidjan</title>
 
     {{-- ══ Favicon ══ --}}
     <link rel="icon" type="image/jpeg" href="{{ asset('assets/images/logo.jpeg') }}">
-    <link rel="apple-touch-icon"       href="{{ asset('assets/images/logo.jpeg') }}">
+    <link rel="apple-touch-icon" href="{{ asset('assets/images/logo.jpeg') }}">
 
     {{-- ══ 1. Preconnect (réduit la latence sur mobile CI) ══ --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     {{-- ══ 2. Google Fonts — Poppins + Syne (Syne était déclaré en CSS mais jamais chargé) ══ --}}
-   <link rel="preconnect" href="https://googleapis.com">
-<link rel="preconnect" href="https://gstatic.com" crossorigin>
-<link href="https://googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600&display=swap"
+        rel="stylesheet">
 
     {{-- ══ 3. Bootstrap CSS ══ --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
@@ -46,25 +49,32 @@
     {{-- ══ STYLES GLOBAUX ══ --}}
     <style>
         :root {
-            --rouge:   #C8102E;
+            --rouge: #C8102E;
             --rouge-c: #A00D24;
             --rouge-p: #FDF2F4;
-            --vert:    #009A44;
-            --vert-c:  #007A36;
-            --vert-p:  #F0FAF4;
-            --blanc:   #FFFFFF;
-            --fond:    #FAFAF8;
-            --texte:   #111827;
+            --vert: #009A44;
+            --vert-c: #007A36;
+            --vert-p: #F0FAF4;
+            --blanc: #FFFFFF;
+            --fond: #FAFAF8;
+            --texte: #111827;
             --texte-2: #6B7280;
-            --or:      #D4A843;
-            --or-c:    #F0C060;
-            --font-d:   'Montserrat', sans-serif;
+            --or: #D4A843;
+            --or-c: #F0C060;
+            --font-d: 'Montserrat', sans-serif;
             --font-b: 'Open Sans', sans-serif;
-            --trans:   .28s cubic-bezier(.4, 0, .2, 1);
+            --trans: .28s cubic-bezier(.4, 0, .2, 1);
         }
 
-        *, *::before, *::after { box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
 
         body {
             font-family: var(--font-b) !important;
@@ -74,7 +84,12 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        h1, h2, h3, h4, h5, h6 {
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
             font-family: var(--font-d) !important;
         }
 
@@ -84,10 +99,13 @@
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 20px rgba(0,0,0,.25);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, .25);
             transition: padding .3s ease, box-shadow .3s ease;
         }
-        .navbar-lc.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,.35); }
+
+        .navbar-lc.scrolled {
+            box-shadow: 0 4px 30px rgba(0, 0, 0, .35);
+        }
 
         .navbar-inner {
             display: flex;
@@ -111,7 +129,7 @@
             object-fit: cover;
             object-position: center;
             flex-shrink: 0;
-            border: 1px solid rgba(0,0,0,.05);
+            border: 1px solid rgba(0, 0, 0, .05);
         }
 
         .nav-brand-text {
@@ -121,10 +139,13 @@
             color: #fff;
             white-space: nowrap;
         }
-        .nav-brand-text span { color: var(--vert-p); }
+
+        .nav-brand-text span {
+            color: var(--vert-p);
+        }
 
         .nav-link-item {
-            color: rgba(255,255,255,.88);
+            color: rgba(255, 255, 255, .88);
             text-decoration: none;
             font-size: .88rem;
             font-weight: 500;
@@ -135,7 +156,11 @@
             gap: .3rem;
             transition: background .2s ease, color .2s ease;
         }
-        .nav-link-item:hover { background: rgba(255,255,255,.15); color: #fff; }
+
+        .nav-link-item:hover {
+            background: rgba(255, 255, 255, .15);
+            color: #fff;
+        }
 
         .nav-link-register {
             background: #fff;
@@ -151,10 +176,14 @@
             gap: .35rem;
             transition: background .2s ease, color .2s ease;
         }
-        .nav-link-register:hover { background: var(--vert-p); color: var(--vert) !important; }
+
+        .nav-link-register:hover {
+            background: var(--vert-p);
+            color: var(--vert) !important;
+        }
 
         .burger-btn {
-            background: rgba(255,255,255,.15);
+            background: rgba(255, 255, 255, .15);
             border: none;
             border-radius: 8px;
             color: #fff;
@@ -167,21 +196,28 @@
             cursor: pointer;
             transition: background .2s;
         }
-        .burger-btn:hover { background: rgba(255,255,255,.25); }
+
+        .burger-btn:hover {
+            background: rgba(255, 255, 255, .25);
+        }
 
         .mobile-menu {
             display: none;
             background: var(--rouge-c);
-            border-top: 1px solid rgba(255,255,255,.1);
+            border-top: 1px solid rgba(255, 255, 255, .1);
             padding: .75rem 1rem 1rem;
         }
-        .mobile-menu.open { display: block; animation: fadeDown .2s ease both; }
+
+        .mobile-menu.open {
+            display: block;
+            animation: fadeDown .2s ease both;
+        }
 
         .mobile-menu-link {
             display: flex;
             align-items: center;
             gap: .55rem;
-            color: rgba(255,255,255,.9);
+            color: rgba(255, 255, 255, .9);
             text-decoration: none;
             padding: .65rem .75rem;
             border-radius: 8px;
@@ -189,18 +225,33 @@
             margin-bottom: .2rem;
             transition: background .2s;
         }
-        .mobile-menu-link:hover { background: rgba(255,255,255,.1); color: #fff; }
-        .mobile-menu-link i { color: rgba(255,255,255,.7); font-size: 1rem; width: 18px; text-align: center; }
+
+        .mobile-menu-link:hover {
+            background: rgba(255, 255, 255, .1);
+            color: #fff;
+        }
+
+        .mobile-menu-link i {
+            color: rgba(255, 255, 255, .7);
+            font-size: 1rem;
+            width: 18px;
+            text-align: center;
+        }
 
         /* ══ FOOTER ══ */
         .site-footer {
             background: var(--rouge-c);
-            color: rgba(255,255,255,.65);
+            color: rgba(255, 255, 255, .65);
             font-size: .83rem;
             padding: 1.75rem 0;
             border-top: 3px solid var(--vert);
         }
-        .site-footer strong { color: #fff; font-family: var(--font-d) !important; }
+
+        .site-footer strong {
+            color: #fff;
+            font-family: var(--font-d) !important;
+        }
+
         .site-footer .footer-brand {
             display: inline-flex;
             align-items: center;
@@ -210,7 +261,10 @@
             font-size: 1rem;
             color: #fff;
         }
-        .site-footer .footer-brand .dot-vert { color: var(--vert-p); }
+
+        .site-footer .footer-brand .dot-vert {
+            color: var(--vert-p);
+        }
 
         /* ══ WHATSAPP ══ */
         .whatsapp-float {
@@ -226,16 +280,22 @@
             justify-content: center;
             z-index: 9999;
             text-decoration: none;
-            box-shadow: 0 4px 20px rgba(37,211,102,.45);
+            box-shadow: 0 4px 20px rgba(37, 211, 102, .45);
             animation: wa-pulse 2.2s ease-out infinite;
             transition: transform .25s ease;
         }
+
         .whatsapp-float:hover {
             transform: scale(1.14) translateY(-3px);
             animation-play-state: paused;
-            box-shadow: 0 8px 32px rgba(37,211,102,.65);
+            box-shadow: 0 8px 32px rgba(37, 211, 102, .65);
         }
-        .whatsapp-float i { font-size: 1.85rem; color: #fff; }
+
+        .whatsapp-float i {
+            font-size: 1.85rem;
+            color: #fff;
+        }
+
         .whatsapp-float::before {
             content: 'Nous contacter';
             position: absolute;
@@ -252,7 +312,11 @@
             transition: opacity .25s, transform .25s;
             pointer-events: none;
         }
-        .whatsapp-float:hover::before { opacity: 1; transform: translateX(0); }
+
+        .whatsapp-float:hover::before {
+            opacity: 1;
+            transform: translateX(0);
+        }
 
         #backToTop {
             position: fixed;
@@ -271,78 +335,293 @@
             opacity: 0;
             transform: translateY(12px);
             transition: .3s ease;
-            box-shadow: 0 4px 16px rgba(200,16,46,.35);
+            box-shadow: 0 4px 16px rgba(200, 16, 46, .35);
             cursor: pointer;
         }
 
         /* ══ KEYFRAMES ══ */
         @keyframes fadeDown {
-            from { opacity: 0; transform: translateY(-10px) }
-            to   { opacity: 1; transform: none }
+            from {
+                opacity: 0;
+                transform: translateY(-10px)
+            }
+
+            to {
+                opacity: 1;
+                transform: none
+            }
         }
+
         @keyframes wa-pulse {
-            0%   { box-shadow: 0 0 0 0    rgba(37,211,102,.6),  0 4px 20px rgba(37,211,102,.45); }
-            70%  { box-shadow: 0 0 0 16px rgba(37,211,102,0),   0 4px 20px rgba(37,211,102,.45); }
-            100% { box-shadow: 0 0 0 0    rgba(37,211,102,0),   0 4px 20px rgba(37,211,102,.45); }
+            0% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, .6), 0 4px 20px rgba(37, 211, 102, .45);
+            }
+
+            70% {
+                box-shadow: 0 0 0 16px rgba(37, 211, 102, 0), 0 4px 20px rgba(37, 211, 102, .45);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0), 0 4px 20px rgba(37, 211, 102, .45);
+            }
         }
+
         @keyframes road-scroll {
-            from { background-position: 0 0 }
-            to   { background-position: 0 200px }
+            from {
+                background-position: 0 0
+            }
+
+            to {
+                background-position: 0 200px
+            }
         }
+
         @keyframes float {
-            0%, 100% { transform: translateY(0)  }
-            50%      { transform: translateY(-8px) }
+
+            0%,
+            100% {
+                transform: translateY(0)
+            }
+
+            50% {
+                transform: translateY(-8px)
+            }
         }
+
         @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(28px) }
-            to   { opacity: 1; transform: translateY(0) }
+            from {
+                opacity: 0;
+                transform: translateY(28px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
         }
+
         @keyframes fadeLeft {
-            from { opacity: 0; transform: translateX(28px) }
-            to   { opacity: 1; transform: translateX(0) }
+            from {
+                opacity: 0;
+                transform: translateX(28px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0)
+            }
         }
 
         /* ══ ANIMATIONS ══ */
         .reveal {
             opacity: 0;
             transform: translateY(24px);
-            transition: opacity .65s cubic-bezier(.4,0,.2,1), transform .65s cubic-bezier(.4,0,.2,1);
+            transition: opacity .65s cubic-bezier(.4, 0, .2, 1), transform .65s cubic-bezier(.4, 0, .2, 1);
         }
-        .reveal.visible { opacity: 1; transform: none; }
 
-        .stagger > * { opacity: 0; transform: translateY(18px); transition: opacity .5s ease, transform .5s ease; }
-        .stagger.visible > *:nth-child(1) { transition-delay: 0s;  opacity: 1; transform: none; }
-        .stagger.visible > *:nth-child(2) { transition-delay: .1s; opacity: 1; transform: none; }
-        .stagger.visible > *:nth-child(3) { transition-delay: .2s; opacity: 1; transform: none; }
-        .stagger.visible > *:nth-child(4) { transition-delay: .3s; opacity: 1; transform: none; }
-        .stagger.visible > *:nth-child(5) { transition-delay: .4s; opacity: 1; transform: none; }
-        .stagger.visible > *:nth-child(6) { transition-delay: .5s; opacity: 1; transform: none; }
+        .reveal.visible {
+            opacity: 1;
+            transform: none;
+        }
 
-        .anim-fade-up   { animation: fadeUp   .6s cubic-bezier(.4,0,.2,1) both; }
-        .anim-fade-down { animation: fadeDown .5s ease both; }
-        .anim-fade-left { animation: fadeLeft .6s cubic-bezier(.4,0,.2,1) both; }
-        .anim-float     { animation: float 3.5s ease-in-out infinite; }
-        .delay-1 { animation-delay: .1s } .delay-2 { animation-delay: .2s }
-        .delay-3 { animation-delay: .3s } .delay-4 { animation-delay: .4s }
+        .stagger>* {
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity .5s ease, transform .5s ease;
+        }
+
+        .stagger.visible>*:nth-child(1) {
+            transition-delay: 0s;
+            opacity: 1;
+            transform: none;
+        }
+
+        .stagger.visible>*:nth-child(2) {
+            transition-delay: .1s;
+            opacity: 1;
+            transform: none;
+        }
+
+        .stagger.visible>*:nth-child(3) {
+            transition-delay: .2s;
+            opacity: 1;
+            transform: none;
+        }
+
+        .stagger.visible>*:nth-child(4) {
+            transition-delay: .3s;
+            opacity: 1;
+            transform: none;
+        }
+
+        .stagger.visible>*:nth-child(5) {
+            transition-delay: .4s;
+            opacity: 1;
+            transform: none;
+        }
+
+        .stagger.visible>*:nth-child(6) {
+            transition-delay: .5s;
+            opacity: 1;
+            transform: none;
+        }
+
+        .anim-fade-up {
+            animation: fadeUp .6s cubic-bezier(.4, 0, .2, 1) both;
+        }
+
+        .anim-fade-down {
+            animation: fadeDown .5s ease both;
+        }
+
+        .anim-fade-left {
+            animation: fadeLeft .6s cubic-bezier(.4, 0, .2, 1) both;
+        }
+
+        .anim-float {
+            animation: float 3.5s ease-in-out infinite;
+        }
+
+        .delay-1 {
+            animation-delay: .1s
+        }
+
+        .delay-2 {
+            animation-delay: .2s
+        }
+
+        .delay-3 {
+            animation-delay: .3s
+        }
+
+        .delay-4 {
+            animation-delay: .4s
+        }
 
         /* ══ SCROLLBAR ══ */
-        ::-webkit-scrollbar       { width: 6px; }
-        ::-webkit-scrollbar-track { background: #F0F4FA; }
-        ::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 3px; }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
 
-        :focus-visible { outline: 2px solid var(--rouge); outline-offset: 3px; border-radius: 4px; }
+        ::-webkit-scrollbar-track {
+            background: #F0F4FA;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #CBD5E1;
+            border-radius: 3px;
+        }
+
+        :focus-visible {
+            outline: 2px solid var(--rouge);
+            outline-offset: 3px;
+            border-radius: 4px;
+        }
 
         @media (max-width:575px) {
-            .whatsapp-float { width: 52px; height: 52px; bottom: 16px; right: 16px; }
-            .whatsapp-float i { font-size: 1.55rem; }
-            .whatsapp-float::before { display: none; }
-            #backToTop { right: 16px; }
+            .whatsapp-float {
+                width: 52px;
+                height: 52px;
+                bottom: 16px;
+                right: 16px;
+            }
+
+            .whatsapp-float i {
+                font-size: 1.55rem;
+            }
+
+            .whatsapp-float::before {
+                display: none;
+            }
+
+            #backToTop {
+                right: 16px;
+            }
         }
 
         @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
-            .whatsapp-float { animation: none !important; }
-            .reveal { opacity: 1 !important; transform: none !important; }
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: .01ms !important;
+                transition-duration: .01ms !important;
+            }
+
+            .whatsapp-float {
+                animation: none !important;
+            }
+
+            .reveal {
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        }
+
+        /* ══ TOP BAR ANNONCE ══ */
+        .topbar-announce {
+            background: linear-gradient(90deg, var(--rouge-c), var(--rouge), var(--rouge-c));
+            background-size: 200% 100%;
+            animation: bar-slide 6s linear infinite;
+            color: #fff;
+            padding: .45rem 0;
+            overflow: hidden;
+            position: relative;
+            z-index: 1001;
+        }
+
+        @keyframes bar-slide {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            100% {
+                background-position: 200% 50%;
+            }
+        }
+
+        .topbar-track {
+            display: flex;
+            width: max-content;
+            animation: marquee-scroll 28s linear infinite;
+        }
+
+        .topbar-track:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes marquee-scroll {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+        .topbar-msg {
+            display: inline-flex;
+            align-items: center;
+            gap: .55rem;
+            font-size: .82rem;
+            font-weight: 700;
+            font-family: var(--font-d) !important;
+            letter-spacing: .02em;
+            white-space: nowrap;
+            padding: 0 3rem;
+            color: #fff;
+        }
+
+        .topbar-sep {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, .45);
+            margin: 0 1.5rem;
+            vertical-align: middle;
+            flex-shrink: 0;
         }
     </style>
 
@@ -393,26 +672,26 @@
                 {{-- picture + width/height explicites → zéro Layout Shift (Core Web Vitals) ══ --}}
                 <picture>
                     <source srcset="{{ asset('assets/images/logo.jpeg') }}" type="image/webp">
-                    <img src="{{ asset('assets/images/logo.jpeg') }}"
-                         class="nav-brand-logo"
-                         alt="Logo Auto-École Le Chemin Abidjan"
-                         width="60" height="55">
+                    <img src="{{ asset('assets/images/logo.jpeg') }}" class="nav-brand-logo"
+                        alt="Logo Auto-École Le Chemin Abidjan" width="60" height="55">
                 </picture>
                 <span class="nav-brand-text">Le&nbsp;<span>Chemin</span></span>
             </a>
 
             <div class="d-none d-md-flex align-items-center gap-1">
-                <a href="{{ route('home') }}"   class="nav-link-item"><i class="bi bi-house"></i>Accueil</a>
-                <a href="#features"             class="nav-link-item"><i class="bi bi-grid"></i>Services</a>
-                <a href="#contact"              class="nav-link-item"><i class="bi bi-geo-alt"></i>Contact</a>
+                <a href="{{ route('home') }}" class="nav-link-item"><i class="bi bi-house"></i>Accueil</a>
+                <a href="#features" class="nav-link-item"><i class="bi bi-grid"></i>Services</a>
+                <a href="#contact" class="nav-link-item"><i class="bi bi-geo-alt"></i>Contact</a>
                 @auth
                     <a href="{{ auth()->user()->isAdmin() ? route('admin.dashboard') : route('eleve.dashboard') }}"
-                       class="nav-link-item">
+                        class="nav-link-item">
                         <i class="bi bi-person-circle"></i>Mon espace
                     </a>
                 @else
-                    <a href="{{ route('login') }}"    class="nav-link-item"><i class="bi bi-box-arrow-in-right"></i>Connexion</a>
-                    <a href="{{ route('register') }}" class="nav-link-register ms-1"><i class="bi bi-person-plus-fill"></i>S'inscrire</a>
+                    <a href="{{ route('login') }}" class="nav-link-item"><i
+                            class="bi bi-box-arrow-in-right"></i>Connexion</a>
+                    <a href="{{ route('register') }}" class="nav-link-register ms-1"><i
+                            class="bi bi-person-plus-fill"></i>S'inscrire</a>
                 @endauth
             </div>
 
@@ -423,25 +702,26 @@
 
         <div class="mobile-menu" id="mobileMenu">
             <div class="container">
-                <a href="{{ route('home') }}"   class="mobile-menu-link"><i class="bi bi-house-fill"></i>Accueil</a>
-                <a href="#features"             class="mobile-menu-link"><i class="bi bi-grid-fill"></i>Services</a>
-                <a href="#contact"              class="mobile-menu-link"><i class="bi bi-geo-alt-fill"></i>Contact</a>
+                <a href="{{ route('home') }}" class="mobile-menu-link"><i class="bi bi-house-fill"></i>Accueil</a>
+                <a href="#features" class="mobile-menu-link"><i class="bi bi-grid-fill"></i>Services</a>
+                <a href="#contact" class="mobile-menu-link"><i class="bi bi-geo-alt-fill"></i>Contact</a>
                 @auth
                     <a href="{{ auth()->user()->isAdmin() ? route('admin.dashboard') : route('eleve.dashboard') }}"
-                       class="mobile-menu-link">
+                        class="mobile-menu-link">
                         <i class="bi bi-person-circle"></i>Mon espace
                     </a>
                     <form method="POST" action="{{ route('logout') }}" style="margin-top:.25rem;">
                         @csrf
                         <button type="submit" class="mobile-menu-link w-100 text-start"
-                                style="background:rgba(0,0,0,.15);border:none;cursor:pointer;">
+                            style="background:rgba(0,0,0,.15);border:none;cursor:pointer;">
                             <i class="bi bi-box-arrow-left"></i>Déconnexion
                         </button>
                     </form>
                 @else
-                    <a href="{{ route('login') }}" class="mobile-menu-link"><i class="bi bi-box-arrow-in-right"></i>Connexion</a>
+                    <a href="{{ route('login') }}" class="mobile-menu-link"><i
+                            class="bi bi-box-arrow-in-right"></i>Connexion</a>
                     <a href="{{ route('register') }}"
-                       style="background:#fff;color:var(--rouge);font-weight:800;border-radius:8px;padding:.65rem .75rem;display:flex;align-items:center;gap:.5rem;font-size:.9rem;text-decoration:none;margin-top:.3rem;">
+                        style="background:#fff;color:var(--rouge);font-weight:800;border-radius:8px;padding:.65rem .75rem;display:flex;align-items:center;gap:.5rem;font-size:.9rem;text-decoration:none;margin-top:.3rem;">
                         <i class="bi bi-person-plus-fill"></i>S'inscrire gratuitement
                     </a>
                 @endauth
@@ -461,11 +741,8 @@
                         <a href="{{ route('home') }}" class="sidebar-brand">
                             <picture>
                                 <source srcset="{{ asset('assets/images/logo.jpeg') }}" type="image/webp">
-                                <img src="{{ asset('assets/images/logo.jpeg') }}"
-                                     class="nav-brand-logo"
-                                     alt="Auto-École Le Chemin"
-                                     width="60" height="55"
-                                     loading="lazy">
+                                <img src="{{ asset('assets/images/logo.jpeg') }}" class="nav-brand-logo"
+                                    alt="Auto-École Le Chemin" width="60" height="55" loading="lazy">
                             </picture>
                         </a>
                     </div>
@@ -475,12 +752,12 @@
                 </div>
                 <div class="col-md-6 text-md-end d-flex flex-wrap gap-3 justify-content-md-end align-items-center">
                     <a href="tel:+2250545160597"
-                       style="color:rgba(255,255,255,.6);text-decoration:none;font-size:.82rem;display:flex;align-items:center;gap:.35rem;">
+                        style="color:rgba(255,255,255,.6);text-decoration:none;font-size:.82rem;display:flex;align-items:center;gap:.35rem;">
                         <i class="bi bi-telephone-fill" style="color:var(--vert-p);"></i>+225 27 24 31 88 38
                     </a>
                     <a href="https://wa.me/2250545160597?text=Bonjour%2C%20je%20souhaite%20des%20informations%20sur%20la%20formation."
-                       target="_blank" rel="noopener noreferrer"
-                       style="color:rgba(255,255,255,.6);text-decoration:none;font-size:.82rem;display:flex;align-items:center;gap:.35rem;">
+                        target="_blank" rel="noopener noreferrer"
+                        style="color:rgba(255,255,255,.6);text-decoration:none;font-size:.82rem;display:flex;align-items:center;gap:.35rem;">
                         <i class="bi bi-whatsapp" style="color:#25D366;"></i>WhatsApp
                     </a>
                 </div>
@@ -490,9 +767,7 @@
 
     {{-- ══ WHATSAPP ══ --}}
     <a href="https://wa.me/2250545160597?text=Bonjour%2C%20je%20souhaite%20m'inscrire%20%C3%A0%20l'auto-%C3%A9cole%20Le%20Chemin."
-       target="_blank" rel="noopener noreferrer"
-       class="whatsapp-float"
-       aria-label="Nous contacter sur WhatsApp">
+        target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Nous contacter sur WhatsApp">
         <i class="bi bi-whatsapp"></i>
     </a>
 
@@ -502,9 +777,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script>
-        const burgerBtn  = document.getElementById('burgerBtn'),
-              mobileMenu = document.getElementById('mobileMenu'),
-              burgerIcon = document.getElementById('burgerIcon');
+        const burgerBtn = document.getElementById('burgerBtn'),
+            mobileMenu = document.getElementById('mobileMenu'),
+            burgerIcon = document.getElementById('burgerIcon');
 
         burgerBtn.addEventListener('click', function () {
             const o = mobileMenu.classList.toggle('open');
@@ -522,7 +797,7 @@
         }, { passive: true });
         window.addEventListener('scroll', function () {
             const b = document.getElementById('backToTop'), s = window.scrollY > 400;
-            b.style.opacity   = s ? '1' : '0';
+            b.style.opacity = s ? '1' : '0';
             b.style.transform = s ? 'translateY(0)' : 'translateY(12px)';
         }, { passive: true });
         document.getElementById('backToTop').addEventListener('click', function () {
@@ -538,7 +813,7 @@
         const vc = document.getElementById('viewCount');
         if (vc) {
             const t = parseInt(vc.dataset.target, 10),
-                  ease = function (x) { return 1 - Math.pow(1 - x, 3); };
+                ease = function (x) { return 1 - Math.pow(1 - x, 3); };
             setTimeout(function () {
                 const s = performance.now();
                 (function tick(n) {
@@ -554,7 +829,7 @@
                 const el = x.target, t = parseInt(el.dataset.counter, 10);
                 if (isNaN(t)) return;
                 const s = performance.now(),
-                      ease = function (v) { return 1 - Math.pow(1 - v, 3); };
+                    ease = function (v) { return 1 - Math.pow(1 - v, 3); };
                 (function tick(n) {
                     const p = Math.min((n - s) / 1400, 1);
                     el.textContent = Math.round(t * ease(p));

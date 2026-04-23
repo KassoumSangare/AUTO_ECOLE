@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
+use App\Models\Announcement;
+use App\Models\Gallery;
 use App\Models\PageView;
 use App\Models\PermitCategory;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use Illuminate\Http\JsonResponse;
 
 class HomeController extends Controller
 {
@@ -25,7 +28,13 @@ class HomeController extends Controller
         // Option B : Si vous avez une ligne unique avec une colonne "views" que vous incrémentez
         // $totalVues = PageView::sum('views');
 
-        return view('welcome', compact('categories', 'totalVues'));
+        $galleryPhotos = Gallery::where('is_active', true)
+            ->orderBy('order')
+            ->orderByDesc('created_at')
+            ->get();
+        $announcement = Announcement::visible()->latest()->first();
+
+        return view('welcome', compact('categories', 'totalVues', 'galleryPhotos', 'announcement'));
     }
 
     /**

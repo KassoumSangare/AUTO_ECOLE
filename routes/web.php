@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminDocumentController;
+use App\Http\Controllers\Admin\AnnouncementController;
 use App\Http\Controllers\Admin\EleveController;
+use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\PermitCategoryController;
-use App\Http\Controllers\Admin\ReportingController;
 use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
+use App\Http\Controllers\Admin\ReportingController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Eleve\DashboardController;
 use App\Http\Controllers\Eleve\DocumentController;
@@ -14,8 +16,8 @@ use App\Http\Controllers\Eleve\PaymentController;
 use App\Http\Controllers\Eleve\ProfileController as EleveProfileController;
 use App\Http\Controllers\Eleve\QuizController;
 use App\Http\Controllers\HomeController;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
+use Illuminate\Support\Facades\Route;
 
 // ══════════════════════════════════════════════════════
 //  ROUTES PUBLIQUES
@@ -117,6 +119,22 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     // Catégories de permis
     Route::resource('permit-categories', PermitCategoryController::class);
     Route::post('permit-categories/{permitCategory}/toggle-active', [PermitCategoryController::class, 'toggleActive'])->name('permit-categories.toggle-active');
+
+
+    // Galerie
+    Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery.index');
+    Route::get('/gallery/create', [GalleryController::class, 'create'])->name('gallery.create');
+    Route::post('/gallery', [GalleryController::class, 'store'])->name('gallery.store');
+    Route::delete('/gallery/{gallery}', [GalleryController::class, 'destroy'])->name('gallery.destroy');
+    Route::patch('/gallery/{gallery}/toggle', [GalleryController::class, 'toggleActive'])->name('gallery.toggle');
+
+    Route::get('/announcements', [AnnouncementController::class, 'index'])->name('announcements.index');
+    Route::get('/announcements/create', [AnnouncementController::class, 'create'])->name('announcements.create');
+    Route::post('/announcements', [AnnouncementController::class, 'store'])->name('announcements.store');
+    Route::get('/announcements/{announcement}/edit', [AnnouncementController::class, 'edit'])->name('announcements.edit');
+    Route::put('/announcements/{announcement}', [AnnouncementController::class, 'update'])->name('announcements.update');
+    Route::delete('/announcements/{announcement}', [AnnouncementController::class, 'destroy'])->name('announcements.destroy');
+    Route::patch('/announcements/{announcement}/toggle', [AnnouncementController::class, 'toggleActive'])->name('announcements.toggle');
 });
 
 // ──────────────────────────────────────────
