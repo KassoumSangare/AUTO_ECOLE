@@ -988,6 +988,9 @@
                 <a href="{{ route('admin.gallery.index') }}" class="sidebar-link @active('admin/gallery*')">
                     <i class="bi bi-images"></i><span>Galerie</span>
                 </a>
+                <a href="{{ route('admin.qcms.index') }}" class="sidebar-link @active('admin/qcms*')">
+                    <i class="bi bi-patch-question-fill"></i><span>QCM</span>
+                </a>
                 <a href="{{ route('admin.announcements.index') }}" class="sidebar-link @active('admin/announcements*')">
                     <i class="bi bi-megaphone-fill"></i><span>Annonces</span>
                 </a>

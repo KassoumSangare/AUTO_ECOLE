@@ -197,13 +197,19 @@ class QuizSeeder extends Seeder
             ],
         ];
 
-        // Insertion en BDD
+        // Insertion en BDD sans écraser les modifications manuelles :
         foreach ($questionsCode as $q) {
-            QuizQuestion::create(array_merge($q, ['category' => 'code', 'is_active' => true]));
+            QuizQuestion::firstOrCreate(
+                ['question' => $q['question']],
+                array_merge($q, ['category' => 'code', 'is_active' => true])
+            );
         }
 
         foreach ($questionsConduite as $q) {
-            QuizQuestion::create(array_merge($q, ['category' => 'conduite', 'is_active' => true]));
+            QuizQuestion::firstOrCreate(
+                ['question' => $q['question']],
+                array_merge($q, ['category' => 'conduite', 'is_active' => true])
+            );
         }
 
         $this->command->info('✅ ' . count($questionsCode) . ' questions Code + ' . count($questionsConduite) . ' questions Conduite insérées.');

@@ -18,14 +18,11 @@ class QuizQuestion extends Model
         'is_active',
     ];
 
-    protected function casts(): array
-    {
-        return [
-            'options'       => 'array',
-            'correct_index' => 'integer',
-            'is_active'     => 'boolean',
-        ];
-    }
+    protected $casts = [
+        'options'       => 'array',
+        'correct_index' => 'integer',
+        'is_active'     => 'boolean',
+    ];
 
     // ── Scopes ───────────────────────────────────────────────
 

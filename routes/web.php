@@ -128,6 +128,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::delete('/gallery/{gallery}', [GalleryController::class, 'destroy'])->name('gallery.destroy');
     Route::patch('/gallery/{gallery}/toggle', [GalleryController::class, 'toggleActive'])->name('gallery.toggle');
 
+    // QCM (questions) - gestion complète via resource
+    Route::resource('qcms', \App\Http\Controllers\Admin\QcmController::class);
+
     Route::get('/announcements', [AnnouncementController::class, 'index'])->name('announcements.index');
     Route::get('/announcements/create', [AnnouncementController::class, 'create'])->name('announcements.create');
     Route::post('/announcements', [AnnouncementController::class, 'store'])->name('announcements.store');
